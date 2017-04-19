@@ -73,11 +73,11 @@ Matrix Pattern::get_matrix() const
   return m;
 }
 
-PatternType Pattern::get_type() const
+Pattern::Type Pattern::get_type() const
 {
   auto pattern_type = cairo_pattern_get_type(m_cobject);
   check_object_status_and_throw_exception(*this);
-  return static_cast<PatternType>(pattern_type);
+  return static_cast<Type>(pattern_type);
 }
 
 void Pattern::set_extend(Extend extend)

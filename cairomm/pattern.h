@@ -51,6 +51,38 @@ protected:
 public:
 
   /**
+   * Type is used to describe the type of a given pattern.
+   *
+   * The pattern type can be queried with Pattern::get_type().
+   *
+   * New entries may be added in future versions.
+   *
+   * @since 1.2
+   **/
+  enum class Type
+  {
+      /**
+       * The pattern is a solid (uniform) color. It may be opaque or translucent.
+       */
+      SOLID = CAIRO_PATTERN_TYPE_SOLID,
+
+      /**
+       * The pattern is a based on a surface (an image)
+       */
+      SURFACE = CAIRO_PATTERN_TYPE_SURFACE,
+
+      /**
+       * The pattern is a linear gradient.
+       */
+      LINEAR = CAIRO_PATTERN_TYPE_LINEAR,
+
+      /**
+       * The pattern is a radial gradient.
+       */
+      RADIAL = CAIRO_PATTERN_TYPE_RADIAL
+  };
+
+  /**
    * Cairo::Extend is used to describe how pattern color/alpha will be determined
    * for areas "outside" the pattern's natural area, (for example, outside the
    * surface bounds or outside the gradient geometry).
@@ -142,7 +174,7 @@ public:
    *
    * @since 1.2
    */
-  PatternType get_type() const;
+  Type get_type() const;
 
   /**
    * Sets the mode to be used for drawing outside the area of a pattern. See

@@ -120,39 +120,6 @@ typedef enum
 
 
 /**
- * Cairo::PatternType is used to describe the type of a given pattern.
- *
- * The pattern type can be queried with Pattern::get_type().
- *
- * New entries may be added in future versions.
- *
- * @since 1.2
- **/
-typedef enum
-{
-    /**
-     * The pattern is a solid (uniform) color. It may be opaque or translucent.
-     */
-    PATTERN_TYPE_SOLID = CAIRO_PATTERN_TYPE_SOLID,
-
-    /**
-     * The pattern is a based on a surface (an image)
-     */
-    PATTERN_TYPE_SURFACE = CAIRO_PATTERN_TYPE_SURFACE,
-
-    /**
-     * The pattern is a linear gradient.
-     */
-    PATTERN_TYPE_LINEAR = CAIRO_PATTERN_TYPE_LINEAR,
-
-    /**
-     * The pattern is a radial gradient.
-     */
-    PATTERN_TYPE_RADIAL = CAIRO_PATTERN_TYPE_RADIAL
-} PatternType;
-
-
-/**
  * Cairo::FontType is used to describe the type of a given font face or scaled
  * font. The font types are also known as "font backends" within cairo.
  *
