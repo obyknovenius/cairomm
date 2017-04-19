@@ -63,27 +63,6 @@ typedef enum
 } Antialias;
 
 /**
- * Specifies variants of a font face based on their slant.
- */
-typedef enum
-{
-    /**
-     * Upright font style
-     */
-    FONT_SLANT_NORMAL = CAIRO_FONT_SLANT_NORMAL,
-
-    /**
-     * Italic font style
-     */
-    FONT_SLANT_ITALIC = CAIRO_FONT_SLANT_ITALIC,
-
-    /**
-     * Oblique font style
-     */
-    FONT_SLANT_OBLIQUE = CAIRO_FONT_SLANT_OBLIQUE
-} FontSlant;
-
-/**
  * Specifies variants of a font face based on their weight.
  */
 typedef enum

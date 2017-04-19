@@ -123,7 +123,7 @@ int main(int, char**)
   cr->set_source_rgba(0.2, 0.2, 0.2, 0.3);
   auto toy_font =
     Cairo::ToyFontFace::create("Bitstream Charter",
-                               Cairo::FONT_SLANT_NORMAL,
+                               Cairo::ToyFontFace::Slant::NORMAL,
                                Cairo::FONT_WEIGHT_BOLD);
   cr->set_font_face(toy_font);
   cr->set_font_size(FONT_SIZE);

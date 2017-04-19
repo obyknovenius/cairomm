@@ -1151,7 +1151,7 @@ public:
    * @param weight the weight for the font
    *
    **/
-  void select_font_face(const std::string& family, FontSlant slant, FontWeight weight);
+  void select_font_face(const std::string& family, ToyFontFace::Slant slant, FontWeight weight);
 
   /**
    * Sets the current font matrix to a scale by a factor of @a size, replacing

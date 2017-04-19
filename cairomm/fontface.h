@@ -106,6 +106,27 @@ class ToyFontFace : public FontFace
 public:
 
   /**
+   * Specifies variants of a font face based on their slant.
+   */
+  enum class Slant
+  {
+      /**
+       * Upright font style
+       */
+      NORMAL = CAIRO_FONT_SLANT_NORMAL,
+
+      /**
+       * Italic font style
+       */
+      ITALIC = CAIRO_FONT_SLANT_ITALIC,
+
+      /**
+       * Oblique font style
+       */
+      OBLIQUE = CAIRO_FONT_SLANT_OBLIQUE
+  };
+
+  /**
    * Creates a font face from a triplet of family, slant, and weight. These font
    * faces are used in implementation of the the Context "toy" font API.
    *
@@ -120,7 +141,7 @@ public:
    * @param slant the slant for the font.
    * @param weight the weight for the font.
    */
-  static RefPtr<ToyFontFace> create(const std::string& family, FontSlant slant, FontWeight weight);
+  static RefPtr<ToyFontFace> create(const std::string& family, Slant slant, FontWeight weight);
 
   /**
    * Gets the familly name of a toy font.
@@ -130,7 +151,7 @@ public:
   /**
    * Gets the slant a toy font.
    */
-  FontSlant get_slant() const;
+  Slant get_slant() const;
 
   /**
    * Gets the weight a toy font.
@@ -138,7 +159,7 @@ public:
   FontWeight get_weight() const;
 
 protected:
-  ToyFontFace(const std::string& family, FontSlant slant, FontWeight weight);
+  ToyFontFace(const std::string& family, Slant slant, FontWeight weight);
 };
 
 

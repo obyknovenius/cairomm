@@ -81,12 +81,12 @@ FontType FontFace::get_type() const
 
 // 'Toy' fonts
 RefPtr<ToyFontFace>
-ToyFontFace::create(const std::string& family, FontSlant slant, FontWeight weight)
+ToyFontFace::create(const std::string& family, Slant slant, FontWeight weight)
 {
   return make_refptr_for_instance<ToyFontFace>(new ToyFontFace(family, slant, weight));
 }
 
-ToyFontFace::ToyFontFace(const std::string& family, FontSlant slant, FontWeight weight) :
+ToyFontFace::ToyFontFace(const std::string& family, Slant slant, FontWeight weight) :
   FontFace(cairo_toy_font_face_create (family.c_str(),
                                        static_cast<cairo_font_slant_t>(slant),
            	                            static_cast<cairo_font_weight_t>(weight)),
@@ -100,9 +100,9 @@ std::string ToyFontFace::get_family() const
   return std::string(cairo_toy_font_face_get_family(m_cobject));
 }
 
-FontSlant ToyFontFace::get_slant() const
+ToyFontFace::Slant ToyFontFace::get_slant() const
 {
-  return FontSlant(cairo_toy_font_face_get_slant(m_cobject));
+  return Slant(cairo_toy_font_face_get_slant(m_cobject));
 }
 
 FontWeight ToyFontFace::get_weight() const

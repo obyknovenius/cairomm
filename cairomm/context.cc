@@ -458,7 +458,7 @@ void Context::copy_clip_rectangle_list(std::vector<Rectangle>& rectangles) const
   cairo_rectangle_list_destroy(c_list);
 }
 
-void Context::select_font_face(const std::string& family, FontSlant slant, FontWeight weight)
+void Context::select_font_face(const std::string& family, ToyFontFace::Slant slant, FontWeight weight)
 {
   cairo_select_font_face(cobj(), family.c_str(),
           static_cast<cairo_font_slant_t>(slant),
