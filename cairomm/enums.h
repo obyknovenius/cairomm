@@ -155,31 +155,6 @@ typedef enum
     SUBPIXEL_ORDER_VBGR = CAIRO_SUBPIXEL_ORDER_VBGR
 } SubpixelOrder;
 
-
-/**
- * Specifies whether to hint font metrics; hinting font metrics means quantizing
- * them so that they are integer values in device space. Doing this improves the
- * consistency of letter and line spacing, however it also means that text will
- * be laid out differently at different zoom factors.
- **/
-typedef enum
-{
-    /**
-     * Hint metrics in the default manner for the font backend and target device
-     */
-    HINT_METRICS_DEFAULT = CAIRO_HINT_METRICS_DEFAULT,
-
-    /**
-     * Do not hint font metrics
-     */
-    HINT_METRICS_OFF = CAIRO_HINT_METRICS_OFF,
-
-    /**
-     * Hint font metrics
-     */
-    HINT_METRICS_ON = CAIRO_HINT_METRICS_ON
-} HintMetrics;
-
 /**
  * Cairo::SurfaceType is used to describe the type of a given surface. The
  * surface types are also known as "backends" or "surface backends" within

@@ -147,7 +147,7 @@ void FontOptions::set_hint_metrics(HintMetrics hint_metrics)
   check_object_status_and_throw_exception(*this);
 }
 
-HintMetrics FontOptions::get_hint_metrics() const
+FontOptions::HintMetrics FontOptions::get_hint_metrics() const
 {
   const auto result =
       static_cast<HintMetrics>(cairo_font_options_get_hint_metrics(m_cobject));

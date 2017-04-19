@@ -77,6 +77,30 @@ public:
       FULL = CAIRO_HINT_STYLE_FULL
   };
 
+  /**
+   * Specifies whether to hint font metrics; hinting font metrics means quantizing
+   * them so that they are integer values in device space. Doing this improves the
+   * consistency of letter and line spacing, however it also means that text will
+   * be laid out differently at different zoom factors.
+   **/
+  enum class HintMetrics
+  {
+      /**
+       * Hint metrics in the default manner for the font backend and target device
+       */
+      DEFAULT = CAIRO_HINT_METRICS_DEFAULT,
+
+      /**
+       * Do not hint font metrics
+       */
+      OFF = CAIRO_HINT_METRICS_OFF,
+
+      /**
+       * Hint font metrics
+       */
+      ON = CAIRO_HINT_METRICS_ON
+  };
+
   FontOptions();
   explicit FontOptions(cairo_font_options_t* cobject, bool take_ownership = false);
   FontOptions(const FontOptions& src);
