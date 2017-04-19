@@ -591,7 +591,7 @@ void Context::glyph_path(const std::vector<Glyph>& glyphs)
   check_object_status_and_throw_exception(*this);
 }
 
-Operator Context::get_operator() const
+Context::Operator Context::get_operator() const
 {
   const auto result =
     static_cast<Operator>(cairo_get_operator(const_cast<cobject*>(cobj())));

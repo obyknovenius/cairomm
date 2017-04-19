@@ -55,6 +55,97 @@ protected:
 
 public:
 
+  /**
+   * Operator is used to set the compositing operator for all cairo
+   * drawing operations.
+   *
+   * The default operator is Cairo::Operator::OVER.
+   *
+   * The operators marked as @a unbounded modify their destination even outside
+   * of the mask layer (that is, their effect is not bound by the mask layer).
+   * However, their effect can still be limited by way of clipping.
+   *
+   * To keep things simple, the operator descriptions here document the behavior
+   * for when both source and destination are either fully transparent or fully
+   * opaque. The actual implementation works for translucent layers too. For a
+   * more detailed explanation of the effects of each operator, including the
+   * mathematical definitions, see
+   * <a href="http://cairographics.org/operators/">this</a>
+   *
+   **/
+  enum class Operator
+  {
+      /**
+       * Clear destination layer (bounded)
+       */
+      CLEAR = CAIRO_OPERATOR_CLEAR,
+
+      /**
+       * Replace destination layer (bounded)
+       */
+      SOURCE = CAIRO_OPERATOR_SOURCE,
+
+      /**
+       * Draw source layer on top of destination layer (bounded)
+       */
+      OVER = CAIRO_OPERATOR_OVER,
+
+      /**
+       * Draw source where there was destination content (unbounded)
+       */
+      IN = CAIRO_OPERATOR_IN,
+
+      /**
+       * Draw source where there was no destination content (unbounded)
+       */
+      OUT = CAIRO_OPERATOR_OUT,
+
+      /**
+       * Draw source on top of destination content and only there
+       */
+      ATOP = CAIRO_OPERATOR_ATOP,
+
+      /**
+       * Ignore the source
+       */
+      DEST = CAIRO_OPERATOR_DEST,
+
+      /**
+       * Draw destination on top of source
+       */
+      DEST_OVER = CAIRO_OPERATOR_DEST_OVER,
+
+      /**
+       * Leave destination only where there was source content (unbounded)
+       */
+      DEST_IN = CAIRO_OPERATOR_DEST_IN,
+
+      /**
+       * Leave destination only where there was no source content
+       */
+      DEST_OUT = CAIRO_OPERATOR_DEST_OUT,
+
+      /**
+       * Leave destination on top of source content and only there (unbounded)
+       */
+      DEST_ATOP = CAIRO_OPERATOR_DEST_ATOP,
+
+      /**
+       * Source and destination are shown where there is only one of them
+       */
+      XOR = CAIRO_OPERATOR_XOR,
+
+      /**
+       * Source and destination layers are accumulated
+       */
+      ADD = CAIRO_OPERATOR_ADD,
+
+      /**
+       * Like over, but assuming source and dest are disjoint geometries
+       */
+      SATURATE = CAIRO_OPERATOR_SATURATE
+  };
+
   /** Create a C++ wrapper for the C instance. This C++ instance should then be
    * given to a RefPtr.
    *
