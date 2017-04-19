@@ -9,7 +9,7 @@ const double TEXT_ORIGIN_X = 50.0;  // arbitrary
 int main(int, char**)
 {
   auto surface =
-    Cairo::ImageSurface::create(Cairo::FORMAT_ARGB32, WIDTH, HEIGHT);
+    Cairo::ImageSurface::create(Cairo::Surface::Format::ARGB32, WIDTH, HEIGHT);
   auto cr = Cairo::Context::create(surface);
   // fill background in white
   cr->set_source_rgb(1.0, 1.0, 1.0);

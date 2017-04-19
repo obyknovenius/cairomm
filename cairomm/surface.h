@@ -78,6 +78,48 @@ namespace Cairo
 class Surface
 {
 public:
+  /**
+   * Format is used to identify the memory format of
+   * image data.
+   *
+   * New entries may be added in future versions.
+   **/
+  enum class Format
+  {
+      /**
+       * Each pixel is a 32-bit quantity, with alpha in the upper 8 bits, then
+       * red, then green, then blue. The 32-bit quantities are stored
+       * native-endian. Pre-multiplied alpha is used. (That is, 50% transparent
+       * red is 0x80800000,
+       */
+      ARGB32 = CAIRO_FORMAT_ARGB32,
+
+      /**
+       * Each pixel is a 32-bit quantity, with the upper 8 bits unused. Red,
+       * Green, and Blue are stored in the remaining 24 bits in that order.
+       */
+      RGB24 = CAIRO_FORMAT_RGB24,
+
+      /**
+       * Each pixel is a 8-bit quantity holding an alpha value
+       */
+      A8 = CAIRO_FORMAT_A8,
+
+      /**
+       * Each pikel is a 1-bit quentity holding an alpha value. Pixels are packed
+       * together into 32-bit quantities. The ordering of the bits matches the
+       * endianess of the platform. On a big-endian machine, the first pixel is in
+       * the uppermost bit, on a little endian machine the first pixel is in the
+       * least-significant bit.
+       */
+      A1 = CAIRO_FORMAT_A1,
+
+      /**
+       * Each fixel is a 16-bit quantity with red in the upper 5 bits, then green
+       * in the middle 6 bits, and blue in the lower 5 bits
+       */
+      RGB16_565 = CAIRO_FORMAT_RGB16_565
+  };
   /** For example:
    * <code>
    * ErrorStatus my_write_func(unsigned char* data, unsigned int length);
@@ -419,7 +461,7 @@ protected:
 
 /** Image surfaces provide the ability to render to memory buffers either
  * allocated by cairo or by the calling code. The supported image formats are
- * those defined in Cairo::Format
+ * those defined in Format
  *
  * An ImageSurface is the most generic type of Surface and the only one that is
  * available by default.  You can either create an ImageSurface whose data is
@@ -502,14 +544,14 @@ public:
    * surface = Cairo::ImageSurface::create (data, format, width, height);
    * @endcode
    *
-   * @param format A Cairo::Format value
+   * @param format A Format value
    * @param width The desired width of an image surface to be created.
    * @return the appropriate stride to use given the desired format and width, or
    * -1 if either the format is invalid or the width too large.
    *
    * @since 1.6
    **/
-  static int format_stride_for_width(Cairo::Format format, int width);
+  static int format_stride_for_width(Format format, int width);
 
   /**
    * Creates an image surface of the specified format and dimensions. Initially

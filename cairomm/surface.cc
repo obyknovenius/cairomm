@@ -349,7 +349,7 @@ const unsigned char* ImageSurface::get_data() const
   return cairo_image_surface_get_data(const_cast<cobject*>(cobj()));
 }
 
-Format ImageSurface::get_format() const
+Surface::Format ImageSurface::get_format() const
 {
   return static_cast<Format>(cairo_image_surface_get_format(const_cast<cobject*>(cobj())));
 }
@@ -359,7 +359,7 @@ int ImageSurface::get_stride() const
   return cairo_image_surface_get_stride(const_cast<cobject*>(cobj()));
 }
 
-int ImageSurface::format_stride_for_width (Cairo::Format format, int width)
+int ImageSurface::format_stride_for_width (Format format, int width)
 {
   return cairo_format_stride_for_width(static_cast<cairo_format_t>(format), width);
 }

@@ -90,7 +90,7 @@ void draw(Cairo::RefPtr<Cairo::Context> cr, int width, int height)
 
 int main (void)
 {
-    auto surface = Cairo::ImageSurface::create(Cairo::FORMAT_ARGB32, WIDTH, HEIGHT);
+    auto surface = Cairo::ImageSurface::create(Cairo::Surface::Format::ARGB32, WIDTH, HEIGHT);
     auto cr = Cairo::Context::create(surface);
     draw(cr, WIDTH, HEIGHT);
 #ifdef CAIRO_HAS_PNG_FUNCTIONS

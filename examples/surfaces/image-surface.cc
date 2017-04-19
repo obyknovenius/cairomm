@@ -16,7 +16,7 @@
 int main()
 {
     auto surface =
-        Cairo::ImageSurface::create(Cairo::FORMAT_ARGB32, 600, 400);
+        Cairo::ImageSurface::create(Cairo::Surface::Format::ARGB32, 600, 400);
 
     auto cr = Cairo::Context::create(surface);
 
