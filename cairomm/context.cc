@@ -660,7 +660,7 @@ void Context::get_current_point(double& x, double& y) const
   check_object_status_and_throw_exception(*this);
 }
 
-FillRule Context::get_fill_rule() const
+Context::FillRule Context::get_fill_rule() const
 {
   const auto result = static_cast<FillRule>(cairo_get_fill_rule(const_cast<cobject*>(cobj())));
   check_object_status_and_throw_exception(*this);
