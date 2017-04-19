@@ -79,6 +79,157 @@ class Surface
 {
 public:
   /**
+   * Type is used to describe the type of a given surface. The
+   * surface types are also known as "backends" or "surface backends" within
+   * cairo.
+   *
+   * The surface type can be queried with Surface::get_type()
+   *
+   * The various Cairo::Surface functions can be used with surfaces of
+   * any type, but some backends also provide type-specific functions
+   * that must only be called with a surface of the appropriate
+   * type.
+   *
+   * New entries may be added in future versions.
+   *
+   * @since 1.2
+   **/
+  enum class Type
+  {
+      /**
+       * The surface is of type image
+       */
+      IMAGE = CAIRO_SURFACE_TYPE_IMAGE,
+
+      /**
+       * The surface is of type pdf
+       */
+      PDF = CAIRO_SURFACE_TYPE_PDF,
+
+      /**
+       * The surface is of type ps
+       */
+      PS = CAIRO_SURFACE_TYPE_PS,
+
+      /**
+       * The surface is of type xlim
+       */
+      XLIB = CAIRO_SURFACE_TYPE_XLIB,
+
+      /**
+       * The surface is of type xcb
+       */
+      XCB = CAIRO_SURFACE_TYPE_XCB,
+
+      /**
+       * The surface is of type glitz
+       */
+      GLITZ = CAIRO_SURFACE_TYPE_GLITZ,
+
+      /**
+       * The surface is of type quartz
+       */
+      QUARTZ = CAIRO_SURFACE_TYPE_QUARTZ,
+
+      /**
+       * The surface is of type win32
+       */
+      WIN32 = CAIRO_SURFACE_TYPE_WIN32,
+
+      /**
+       * The surface is of type beos
+       */
+      BEOS = CAIRO_SURFACE_TYPE_BEOS,
+
+      /**
+       * The surface is of type directfb
+       */
+      DIRECTFB = CAIRO_SURFACE_TYPE_DIRECTFB,
+
+      /**
+       * The surface is of type svg
+       */
+      SVG = CAIRO_SURFACE_TYPE_SVG,
+
+      /**
+       * The surface is of type os2
+       */
+      OS2 = CAIRO_SURFACE_TYPE_OS2,
+
+      /**
+       * The surface is a win32 printing surface
+       */
+      WIN32_PRINTING = CAIRO_SURFACE_TYPE_WIN32_PRINTING,
+
+      /**
+       * The surface is of type quartz_image
+       */
+      QUARTZ_IMAGE = CAIRO_SURFACE_TYPE_QUARTZ_IMAGE,
+
+      /**
+       * The surface is of type script
+       * @since 1.10
+       */
+      SCRIPT = CAIRO_SURFACE_TYPE_SCRIPT,
+
+      /**
+       * The surface is of type Qt
+       * @since 1.10
+       */
+      QT = CAIRO_SURFACE_TYPE_QT,
+
+      /**
+       * The surface is of type recording
+       * @since 1.10
+       */
+      RECORDING = CAIRO_SURFACE_TYPE_RECORDING,
+
+      /**
+       * The surface is a OpenVg surface
+       * @since 1.10
+       */
+      VG = CAIRO_SURFACE_TYPE_VG,
+
+      /**
+       * The surface is of type OpenGl
+       * @since 1.10
+       */
+      GL = CAIRO_SURFACE_TYPE_GL,
+
+      /**
+       * The surface is of type Direct Render Manager
+       * @since 1.10
+       */
+      DRM = CAIRO_SURFACE_TYPE_DRM,
+
+      /**
+       * The surface is of type script 'tee' (a multiplexing surface)
+       * @since 1.10
+       */
+      TEE = CAIRO_SURFACE_TYPE_TEE,
+
+      /**
+       * The surface is of type XML (for debugging)
+       * @since 1.10
+       */
+      XML = CAIRO_SURFACE_TYPE_XML,
+
+      /**
+       * The surface is of type Skia
+       * @since 1.10
+       */
+      SKIA = CAIRO_SURFACE_TYPE_SKIA,
+
+      /**
+       * The surface is of type The surface is a subsurface created with
+       * Surface::create()
+       * @since 1.10
+       */
+      SUBSURFACE = CAIRO_SURFACE_TYPE_SUBSURFACE
+
+  };
+
+  /**
    * Format is used to identify the memory format of
    * image data.
    *
@@ -323,7 +474,7 @@ public:
    */
   void get_fallback_resolution(double& x_pixels_per_inch, double& y_pixels_per_inch) const;
 
-  SurfaceType get_type() const;
+  Type get_type() const;
 
   /**
    * This function returns the content type of surface which indicates whether

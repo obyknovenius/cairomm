@@ -177,12 +177,12 @@ void Surface::get_fallback_resolution(double& x_pixels_per_inch,
   check_object_status_and_throw_exception(*this);
 }
 
-SurfaceType Surface::get_type() const
+Surface::Type Surface::get_type() const
 {
   auto surface_type =
     cairo_surface_get_type(const_cast<cobject*>(cobj()));
   check_object_status_and_throw_exception(*this);
-  return static_cast<SurfaceType>(surface_type);
+  return static_cast<Type>(surface_type);
 }
 
 Content Surface::get_content() const
