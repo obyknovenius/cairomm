@@ -248,6 +248,47 @@ protected:
 
 public:
 
+  /**
+   * Filter is used to indicate what filtering should be applied when
+   * reading pixel values from patterns. See Cairo::SurfacePattern::set_filter()
+   * for indicating the desired filter to be used with a particular pattern.
+   */
+  enum class Filter
+  {
+      /**
+       * A high-performance filter, with quality similar to Cairo::Patern::Filter::NEAREST
+       */
+      FAST = CAIRO_FILTER_FAST,
+
+      /**
+       * A reasonable-performance filter, with quality similar to
+       * Cairo::BILINEAR
+       */
+      GOOD = CAIRO_FILTER_GOOD,
+
+      /**
+       * The highest-quality available, performance may not be suitable for
+       * interactive use.
+       */
+      BEST = CAIRO_FILTER_BEST,
+
+      /**
+       * Nearest-neighbor filtering
+       */
+      NEAREST = CAIRO_FILTER_NEAREST,
+
+      /**
+       * Linear interpolation in two dimensions
+       */
+      BILINEAR = CAIRO_FILTER_BILINEAR,
+
+      /**
+       * This filter value is currently unimplemented, and should not be used in
+       * current code.
+       */
+      GAUSSIAN = CAIRO_FILTER_GAUSSIAN
+  };
+
   /** Create a C++ wrapper for the C instance. This C++ instance should then be given to a RefPtr.
    * @param cobject The C instance.
    * @param has_reference Whether we already have a reference. Otherwise, the constructor will take an extra reference.

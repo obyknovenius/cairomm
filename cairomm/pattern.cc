@@ -167,7 +167,7 @@ void SurfacePattern::set_filter(Filter filter)
   check_object_status_and_throw_exception(*this);
 }
 
-Filter SurfacePattern::get_filter() const
+SurfacePattern::Filter SurfacePattern::get_filter() const
 {
   auto result = static_cast<Filter>(cairo_pattern_get_filter(m_cobject));
   check_object_status_and_throw_exception(*this);
