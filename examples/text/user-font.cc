@@ -124,7 +124,7 @@ int main(int, char**)
   auto toy_font =
     Cairo::ToyFontFace::create("Bitstream Charter",
                                Cairo::ToyFontFace::Slant::NORMAL,
-                               Cairo::FONT_WEIGHT_BOLD);
+                               Cairo::ToyFontFace::Weight::BOLD);
   cr->set_font_face(toy_font);
   cr->set_font_size(FONT_SIZE);
   cr->show_text("cairomm!");

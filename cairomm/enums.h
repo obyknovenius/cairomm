@@ -63,22 +63,6 @@ typedef enum
 } Antialias;
 
 /**
- * Specifies variants of a font face based on their weight.
- */
-typedef enum
-{
-    /**
-     * Normal font weight
-     */
-    FONT_WEIGHT_NORMAL = CAIRO_FONT_WEIGHT_NORMAL,
-
-    /**
-     * Bold font weight
-     */
-    FONT_WEIGHT_BOLD = CAIRO_FONT_WEIGHT_BOLD
-} FontWeight;
-
-/**
  * Cairo::Content is used to describe the content that a surface will contain,
  * whether color information, alpha information (translucence vs. opacity), or
  * both.

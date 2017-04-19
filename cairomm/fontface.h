@@ -127,6 +127,22 @@ public:
   };
 
   /**
+   * Specifies variants of a font face based on their weight.
+   */
+  enum class Weight
+  {
+      /**
+       * Normal font weight
+       */
+      NORMAL = CAIRO_FONT_WEIGHT_NORMAL,
+
+      /**
+       * Bold font weight
+       */
+      BOLD = CAIRO_FONT_WEIGHT_BOLD
+  };
+
+  /**
    * Creates a font face from a triplet of family, slant, and weight. These font
    * faces are used in implementation of the the Context "toy" font API.
    *
@@ -141,7 +157,7 @@ public:
    * @param slant the slant for the font.
    * @param weight the weight for the font.
    */
-  static RefPtr<ToyFontFace> create(const std::string& family, Slant slant, FontWeight weight);
+  static RefPtr<ToyFontFace> create(const std::string& family, Slant slant, Weight weight);
 
   /**
    * Gets the familly name of a toy font.
@@ -156,10 +172,10 @@ public:
   /**
    * Gets the weight a toy font.
    */
-  FontWeight get_weight() const;
+  Weight get_weight() const;
 
 protected:
-  ToyFontFace(const std::string& family, Slant slant, FontWeight weight);
+  ToyFontFace(const std::string& family, Slant slant, Weight weight);
 };
 
 

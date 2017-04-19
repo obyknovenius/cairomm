@@ -45,7 +45,7 @@ void draw(Cairo::RefPtr<Cairo::Context> cr, int width, int height)
     std::string text("cairo");
 
     cr->select_font_face("Bitstream Vera Sans", Cairo::ToyFontFace::Slant::NORMAL,
-            Cairo::FONT_WEIGHT_NORMAL);
+            Cairo::ToyFontFace::Weight::NORMAL);
     cr->set_font_size(TEXT_SIZE);
 
     Cairo::FontOptions font_options;
