@@ -50,6 +50,43 @@ protected:
 
 public:
 
+  /**
+   * Cairo::Extend is used to describe how pattern color/alpha will be determined
+   * for areas "outside" the pattern's natural area, (for example, outside the
+   * surface bounds or outside the gradient geometry).
+   *
+   * Mesh patterns are not affected by the extend mode.
+   *
+   * The default extend mode is Cairo::Pattern::Extend::NONE for surface patterns and
+   * Cairo::Pattern::Extend::PAD for gradient patterns.
+   *
+   * New entries may be added in future versions.
+   **/
+  enum class Extend
+  {
+      /**
+       * Pixels outside of the source pattern are fully transparent
+       */
+      NONE = CAIRO_EXTEND_NONE,
+
+      /**
+       * The pattern is tiled by repeating
+       */
+      REPEAT = CAIRO_EXTEND_REPEAT,
+
+      /**
+       * The pattern is tiled by reflecting at the edges (Implemented for surface
+       * patterns since 1.6)
+       */
+      REFLECT = CAIRO_EXTEND_REFLECT,
+
+      /**
+       * Pixels outside of the pattern copy the closest pixel from the source
+       * (Since 1.2; but only implemented for surface patterns since 1.6)
+       */
+      PAD = CAIRO_EXTEND_PAD
+  };
+
   /** Create a C++ wrapper for the C instance. This C++ instance should then be given to a RefPtr.
    * @param cobject The C instance.
    * @param has_reference Whether we already have a reference. Otherwise, the constructor will take an extra reference.
@@ -111,8 +148,8 @@ public:
    * Sets the mode to be used for drawing outside the area of a pattern. See
    * Cairo::Extend for details on the semantics of each extend strategy.
    *
-   * The default extend mode is Cairo::EXTEND_NONE for surface patterns and
-   * Cairo::EXTEND_PAD for gradient patterns.
+   * The default extend mode is Cairo::Pattern::Extend::NONE for surface patterns and
+   * Cairo::Pattern::Extend::PAD for gradient patterns.
    *
    * @param Cairo::Extend describing how the area outsize of the pattern will
    *   be drawn

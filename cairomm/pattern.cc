@@ -86,7 +86,7 @@ void Pattern::set_extend(Extend extend)
   check_object_status_and_throw_exception(*this);
 }
 
-Extend Pattern::get_extend() const
+Pattern::Extend Pattern::get_extend() const
 {
   const auto result = static_cast<Extend>(cairo_pattern_get_extend(m_cobject));
   check_object_status_and_throw_exception(*this);
