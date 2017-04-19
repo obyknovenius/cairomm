@@ -63,30 +63,6 @@ typedef enum
 } Antialias;
 
 /**
- * Specifies how to render the junction of two lines when stroking.
- *
- * The default line join style is Cairo::LINE_JOIN_MITER.
- */
-typedef enum
-{
-    /**
-     * Use a sharp (angled) corner, see Context::set_miter_limit()
-     */
-    LINE_JOIN_MITER = CAIRO_LINE_JOIN_MITER,
-
-    /**
-     * Use a rounded join, the center of teh circle is the joint point
-     */
-    LINE_JOIN_ROUND = CAIRO_LINE_JOIN_ROUND,
-
-    /**
-     * Use cut-off join, the join is cut off at half the line width from the
-     * join point
-     */
-    LINE_JOIN_BEVEL = CAIRO_LINE_JOIN_BEVEL
-} LineJoin;
-
-/**
  * Specifies variants of a font face based on their slant.
  */
 typedef enum

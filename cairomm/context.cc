@@ -681,7 +681,7 @@ Context::LineCap Context::get_line_cap() const
   return result;
 }
 
-LineJoin Context::get_line_join() const
+Context::LineJoin Context::get_line_join() const
 {
   const auto result = static_cast<LineJoin>(cairo_get_line_join(const_cast<cobject*>(cobj())));
   check_object_status_and_throw_exception(*this);

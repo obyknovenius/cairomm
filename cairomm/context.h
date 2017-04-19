@@ -201,6 +201,30 @@ public:
       SQUARE = CAIRO_LINE_CAP_SQUARE
   };
 
+  /**
+   * Specifies how to render the junction of two lines when stroking.
+   *
+   * The default line join style is Cairo::LineJoin::MITER.
+   */
+  enum class LineJoin
+  {
+      /**
+       * Use a sharp (angled) corner, see Context::set_miter_limit()
+       */
+      MITER = CAIRO_LINE_JOIN_MITER,
+
+      /**
+       * Use a rounded join, the center of teh circle is the joint point
+       */
+      ROUND = CAIRO_LINE_JOIN_ROUND,
+
+      /**
+       * Use cut-off join, the join is cut off at half the line width from the
+       * join point
+       */
+      BEVEL = CAIRO_LINE_JOIN_BEVEL
+  };
+
   /** Create a C++ wrapper for the C instance. This C++ instance should then be
    * given to a RefPtr.
    *
@@ -400,7 +424,7 @@ public:
    * examined by stroke(), stroke_extents(), and stroke_to_path(), but does not
    * have any effect during path construction.
    *
-   * The default line join style is Cairo::LINE_JOIN_MITER.
+   * The default line join style is Cairo::LineJoin::MITER.
    *
    * @param line_join	a line joint style, as a LineJoin
    */
@@ -447,7 +471,7 @@ public:
   /**
    * Sets the current miter limit within the cairo context.
    *
-   * If the current line join style is set to Cairo::LINE_JOIN_MITER (see
+   * If the current line join style is set to Cairo::LineJoin::MITER (see
    * set_line_join()), the miter limit is used to determine whether the lines
    * should be joined with a bevel instead of a miter. Cairo divides the length
    * of the miter by the line width. If the result is greater than the miter
