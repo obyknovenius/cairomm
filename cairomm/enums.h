@@ -170,25 +170,6 @@ typedef enum
     TEXT_CLUSTER_FLAG_BACKWARD = CAIRO_TEXT_CLUSTER_FLAG_BACKWARD
 } TextClusterFlags;
 
-//TODO: Documentation
-typedef enum
-{
-    /**
-     * Completely inside region
-     */
-    REGION_OVERLAP_IN = CAIRO_REGION_OVERLAP_IN,
-
-    /**
-     * Completely outside region
-     */
-    REGION_OVERLAP_OUT = CAIRO_REGION_OVERLAP_OUT,
-
-    /**
-     * Partly inside region
-     */
-    REGION_OVERLAP_PART = CAIRO_REGION_OVERLAP_PART
-} RegionOverlap;
-
 /**
  * A set of synthesis options to control how FreeType renders the glyphs for a
  * particular font face.

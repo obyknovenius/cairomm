@@ -131,9 +131,9 @@ bool Region::empty() const
   return cairo_region_is_empty(m_cobject);
 }
 
-RegionOverlap Region::contains_rectangle(const RectangleInt& rectangle) const
+Region::Overlap Region::contains_rectangle(const RectangleInt& rectangle) const
 {
-  return (RegionOverlap)cairo_region_contains_rectangle(m_cobject, &rectangle);
+  return (Overlap)cairo_region_contains_rectangle(m_cobject, &rectangle);
 }
 
 bool Region::contains_point(int x, int y) const
