@@ -178,6 +178,29 @@ public:
       EVEN_ODD = CAIRO_FILL_RULE_EVEN_ODD
   };
 
+  /**
+   * Specifies how to render the endpoints of the path when stroking.
+   *
+   * The default line cap style is Cairo::LineCap::BUTT.
+   **/
+  enum class LineCap
+  {
+      /**
+       * Start(stop) the line exactly at the start(end) point
+       */
+      BUTT = CAIRO_LINE_CAP_BUTT,
+
+      /**
+       * Use a round ending, the center of teh circle is teh end point
+       */
+      ROUND = CAIRO_LINE_CAP_ROUND,
+
+      /**
+       * Use squared ending, the center of teh square is the end point
+       */
+      SQUARE = CAIRO_LINE_CAP_SQUARE
+  };
+
   /** Create a C++ wrapper for the C instance. This C++ instance should then be
    * given to a RefPtr.
    *
@@ -364,7 +387,7 @@ public:
    * examined by stroke(), stroke_extents(), and stroke_to_path(), but does not
    * have any effect during path construction.
    * 
-   * The default line cap style is Cairo::LINE_CAP_BUTT.
+   * The default line cap style is Cairo::LineCap::BUTT.
    *
    * @param line_cap	a line cap style, as a LineCap
    */
@@ -396,7 +419,7 @@ public:
    *
    * Each "on" segment will have caps applied as if the segment were a separate
    * sub-path. In particular, it is valid to use an "on" length of 0.0 with
-   * Cairo::LINE_CAP_ROUND or Cairo::LINE_CAP_SQUARE in order to distributed
+   * Cairo::LineCap::ROUND or Cairo::LineCap::SQUARE in order to distributed
    * dots or squares along a path.
    *
    * Note: The length values are in user-space units as evaluated at the time
@@ -809,19 +832,19 @@ public:
    * situations:
    *
    * 1. Zero-length "on" segments set in set_dash(). If the cap style is
-   * Cairo::LINE_CAP_ROUND or Cairo::LINE_CAP_SQUARE then these segments will
+   * Cairo::LineCap::ROUND or Cairo::LineCap::SQUARE then these segments will
    * be drawn as circular dots or squares respectively. In the case of
-   * Cairo::LINE_CAP_SQUARE, the orientation of the squares is determined by
+   * Cairo::LineCap::SQUARE, the orientation of the squares is determined by
    * the direction of the underlying path.
    *
    * 2. A sub-path created by move_to() followed by either a close_path() or
    * one or more calls to line_to() to the same coordinate as the move_to(). If
-   * the cap style is Cairo::LINE_CAP_ROUND then these sub-paths will be drawn
-   * as circular dots. Note that in the case of Cairo::LINE_CAP_SQUARE a
+   * the cap style is Cairo::LineCap::ROUND then these sub-paths will be drawn
+   * as circular dots. Note that in the case of Cairo::LineCap::SQUARE a
    * degenerate sub-path will not be drawn at all, (since the correct
    * orientation is indeterminate).
    *
-   * In no case will a cap style of Cairo::LINE_CAP_BUTT cause anything to be
+   * In no case will a cap style of Cairo::LineCap::BUTT cause anything to be
    * drawn in the case of either degenerate segments or sub-paths.
    */
   void stroke();
@@ -1463,7 +1486,7 @@ public:
    * operations.
    *
    * The result of path_extents() is defined as equivalent to the limit of
-   * stroke_extents() with LINE_CAP_ROUND as the line width approaches 0.0, (but
+   * stroke_extents() with LineCap::ROUND as the line width approaches 0.0, (but
    * never reaching the empty-rectangle returned by stroke_extents() for a line
    * width of 0.0).
    *

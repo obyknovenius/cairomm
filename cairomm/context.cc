@@ -674,7 +674,7 @@ double Context::get_line_width() const
   return result;
 }
 
-LineCap Context::get_line_cap() const
+Context::LineCap Context::get_line_cap() const
 {
   const auto result = static_cast<LineCap>(cairo_get_line_cap(const_cast<cobject*>(cobj())));
   check_object_status_and_throw_exception(*this);

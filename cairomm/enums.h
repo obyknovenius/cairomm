@@ -63,29 +63,6 @@ typedef enum
 } Antialias;
 
 /**
- * Specifies how to render the endpoints of the path when stroking.
- *
- * The default line cap style is Cairo::LINE_CAP_BUTT.
- **/
-typedef enum
-{
-    /**
-     * Start(stop) the line exactly at the start(end) point
-     */
-    LINE_CAP_BUTT = CAIRO_LINE_CAP_BUTT,
-
-    /**
-     * Use a round ending, the center of teh circle is teh end point
-     */
-    LINE_CAP_ROUND = CAIRO_LINE_CAP_ROUND,
-
-    /**
-     * Use squared ending, the center of teh square is the end point
-     */
-    LINE_CAP_SQUARE = CAIRO_LINE_CAP_SQUARE
-} LineCap;
-
-/**
  * Specifies how to render the junction of two lines when stroking.
  *
  * The default line join style is Cairo::LINE_JOIN_MITER.
