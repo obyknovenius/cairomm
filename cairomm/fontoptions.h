@@ -38,6 +38,45 @@ namespace Cairo
 class FontOptions
 {
 public:
+  /**
+   * Specifies the type of hinting to do on font outlines. Hinting is the process
+   * of fitting outlines to the pixel grid in order to improve the appearance of
+   * the result. Since hinting outlines involves distorting them, it also reduces
+   * the faithfulness to the original outline shapes. Not all of the outline
+   * hinting styles are supported by all font backends.
+   *
+   * New entries may be added in future versions.
+   **/
+  enum class HintStyle
+  {
+      /**
+       * Use the default hint style for font backend and target device
+       */
+      DEFAULT = CAIRO_HINT_STYLE_DEFAULT,
+
+      /**
+       * Do not hint outlines
+       */
+      NONE = CAIRO_HINT_STYLE_NONE,
+
+      /**
+       * Hint outlines slightly to improve contrast while retaining food fidelity
+       * to the original shapes
+       */
+      SLIGHT = CAIRO_HINT_STYLE_SLIGHT,
+
+      /**
+       * Hint outlines with medium strength giving a compromise between fidelity
+       * to the original shapes and contrast
+       */
+      MEDIUM = CAIRO_HINT_STYLE_MEDIUM,
+
+      /**
+       * Hint outlines to maximize contrast
+       */
+      FULL = CAIRO_HINT_STYLE_FULL
+  };
+
   FontOptions();
   explicit FontOptions(cairo_font_options_t* cobject, bool take_ownership = false);
   FontOptions(const FontOptions& src);

@@ -50,7 +50,7 @@ void draw(Cairo::RefPtr<Cairo::Context> cr, int width, int height)
 
     Cairo::FontOptions font_options;
 
-    font_options.set_hint_style(Cairo::HINT_STYLE_NONE);
+    font_options.set_hint_style(Cairo::FontOptions::HintStyle::NONE);
     font_options.set_hint_metrics(Cairo::HINT_METRICS_OFF);
     font_options.set_antialias(Cairo::ANTIALIAS_GRAY);
 

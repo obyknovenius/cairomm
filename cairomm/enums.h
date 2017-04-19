@@ -157,46 +157,6 @@ typedef enum
 
 
 /**
- * Specifies the type of hinting to do on font outlines. Hinting is the process
- * of fitting outlines to the pixel grid in order to improve the appearance of
- * the result. Since hinting outlines involves distorting them, it also reduces
- * the faithfulness to the original outline shapes. Not all of the outline
- * hinting styles are supported by all font backends.
- *
- * New entries may be added in future versions.
- **/
-typedef enum
-{
-    /**
-     * Use the default hint style for font backend and target device
-     */
-    HINT_STYLE_DEFAULT = CAIRO_HINT_STYLE_DEFAULT,
-
-    /**
-     * Do not hint outlines
-     */
-    HINT_STYLE_NONE = CAIRO_HINT_STYLE_NONE,
-
-    /**
-     * Hint outlines slightly to improve contrast while retaining food fidelity
-     * to the original shapes
-     */
-    HINT_STYLE_SLIGHT = CAIRO_HINT_STYLE_SLIGHT,
-
-    /**
-     * Hint outlines with medium strength giving a compromise between fidelity
-     * to the original shapes and contrast
-     */
-    HINT_STYLE_MEDIUM = CAIRO_HINT_STYLE_MEDIUM,
-
-    /**
-     * Hint outlines to maximize contrast
-     */
-    HINT_STYLE_FULL = CAIRO_HINT_STYLE_FULL
-} HintStyle;
-
-
-/**
  * Specifies whether to hint font metrics; hinting font metrics means quantizing
  * them so that they are integer values in device space. Doing this improves the
  * consistency of letter and line spacing, however it also means that text will
