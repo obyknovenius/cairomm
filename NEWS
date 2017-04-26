@@ -1,3 +1,29 @@
+1.15.4 (unstable):
+(Distros should probably not package this yet.)
+
+* Use C++11 enum classes instead of old-style enums, and put some enums
+  inside relevant class declarations:
+  - Change Cairo::RegionOverlap enum to Cairo::Region::Overlap.
+  - Change Cairo::PatternType enum to Cairo::Pattern::Type.
+  - Change Cairo::FontWeight enum to Cairo::ToyFontFace::Weight.
+  - Change Cairo::FontSlant enum to Cairo::ToyFontFace::Slant.
+  - Change Cairo::SurfaceType enum to Cairo::Surface::Type.
+  - Change Cairo::HintMetrics enum to Cairo::FontOptions::HintMetrics.
+  - Change Cairo::HintStyle enum to Cairo::FontOptions::HintStyle.
+  - Change Cairo::Filter enum to Cairo::SurfacePattern::Filter.
+  - Change Cairo::Extend enum to Cairo::Pattern::Extend.
+  - Change Cairo::Format enum to Cairo::Surface::Format.
+  - Change Cairo::DeviceType enum to Cairo::Device::DeviceType.
+  - Change Cairo::LineJoin enum to Cairo::Context::LineJoin.
+  - Change Cairo::LineCap enum to Cairo::Context::LineCap.
+  - Change Cairo::FillRule enum to Cairo::Context::FillRule.
+  - Change Cairo::Operator enum to Cairo::Context::Operator.
+  (Murray Cumming)
+* Build: Win32 / Visual Studio builds:
+  - Require Visual Studio 2017
+  - Remove leftovers from removing deprecated Win32::create()
+  (Chun-wei Fan) Bug #100210
+
 1.15.3 (unstable):
 (Distros should probably not package this yet.)
 
