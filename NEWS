@@ -1,3 +1,11 @@
+1.15.5 (unstable)
+(Distros should probably not package this yet.)
+
+* enums.h: Guard the FT-specific include and the enum with an ifdef.
+  (John Ralls) Bug #100894.
+* Build: configure.ac: Require C++14, because libsigc++-3.0 does.
+  (John Ralls) Bug #100884
+
 1.15.4 (unstable):
 (Distros should probably not package this yet.)
 
