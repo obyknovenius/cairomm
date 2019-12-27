@@ -4,9 +4,12 @@
 # one is maintaining the NMake build files.
 
 # Create the build directories
-$(CFG)\$(PLAT)\gendef $(CFG)\$(PLAT)\cairomm $(CFG)\$(PLAT)\cairomm-ex $(CFG)\$(PLAT)\cairomm-tests:
+vs$(VSVER)\$(CFG)\$(PLAT)\gendef	\
+vs$(VSVER)\$(CFG)\$(PLAT)\cairomm	\
+vs$(VSVER)\$(CFG)\$(PLAT)\cairomm-ex	\
+vs$(VSVER)\$(CFG)\$(PLAT)\cairomm-tests:
 	@-mkdir $@
 
 # Generate .def files
-$(CFG)\$(PLAT)\cairomm\cairomm.def: $(GENDEF) $(CFG)\$(PLAT)\cairomm $(cairomm_OBJS)
-	$(CFG)\$(PLAT)\gendef.exe $@ $(CAIROMM_LIBNAME) $(CFG)\$(PLAT)\cairomm\*.obj
+vs$(VSVER)\$(CFG)\$(PLAT)\cairomm\cairomm.def: $(GENDEF) vs$(VSVER)\$(CFG)\$(PLAT)\cairomm $(cairomm_OBJS)
+	vs$(VSVER)\$(CFG)\$(PLAT)\gendef.exe $@ $(CAIROMM_LIBNAME) vs$(VSVER)\$(CFG)\$(PLAT)\cairomm\*.obj
