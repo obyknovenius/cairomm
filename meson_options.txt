@@ -13,4 +13,4 @@ option('build-documentation', type: 'combo', choices: ['false', 'if-maintainer-m
 option('build-examples', type: 'boolean', value: true,
   description: 'Build example programs')
 option('build-tests', type: 'combo', choices: ['false', 'if-dependencies-found', 'true'],
-  value: 'if-dependencies-found', description: 'Build test programs (requires Boost Test and Fontconfig)')
+  value: 'if-dependencies-found', description: 'Build test programs (requires Boost Test and Fontconfig or Windows)')

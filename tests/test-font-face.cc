@@ -49,7 +49,7 @@ void test_toy_getters ()
   BOOST_CHECK_EQUAL (Cairo::FONT_TYPE_TOY, toy->get_type());
 }
 
-#ifdef CAIRO_HAS_FT_FONT
+#if defined (CAIRO_HAS_FT_FONT) && defined (CAIRO_HAS_FC_FONT)
 void test_ft_font_face()
 {
   // Does not throw an exception. Skip this test for now. /Kjell Ahlstedt 2020-04-21
@@ -70,7 +70,7 @@ void test_ft_font_face()
 
   // FIXME: test creating from a FT_Face
 }
-#endif // CAIRO_HAS_FT_FONT
+#endif // CAIRO_HAS_FT_FONT && CAIRO_HAS_FC_FONT
 
 #ifdef CAIRO_HAS_WIN32_FONT
 void test_win32_font_face()
@@ -113,7 +113,7 @@ init_unit_test_suite(int argc, char* argv[])
 
   test->add (BOOST_TEST_CASE (&test_create_toy));
   test->add (BOOST_TEST_CASE (&test_toy_getters));
-#ifdef CAIRO_HAS_FT_FONT
+#if defined (CAIRO_HAS_FT_FONT) && defined (CAIRO_HAS_FC_FONT)
   test->add (BOOST_TEST_CASE (&test_ft_font_face));
 #endif // CAIRO_HAS_FT_FONT
 #ifdef CAIRO_HAS_WIN32_FONT

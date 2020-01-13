@@ -146,7 +146,8 @@ boost_unit_test_framework_dep = dependency('boost', modules: 'unit_test_framewor
   static: true, version: '>=1.33.1', required: false)
 fontconfig_dep = dependency('fontconfig', required: false)
 test_dep = [ boost_unit_test_framework_dep, fontconfig_dep]
-can_test = boost_unit_test_framework_dep.found() and fontconfig_dep.found()
+can_test = boost_unit_test_framework_dep.found() and \
+           (fontconfig_dep.found() or host_machine.system() == 'windows')
 build_tests = build_tests_opt == 'true' or \
              (build_tests_opt == 'if-dependencies-found' and can_test)
 if build_tests and not can_test
