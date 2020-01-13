@@ -66,7 +66,7 @@ $(cairomm_OBJS)
 {..\tests\}.cc{vs$(VSVER)\$(CFG)\$(PLAT)\}.exe:
 	@if not exist $(CAIROMM_LIB) $(MAKE) -f Makefile.vc CFG=$(CFG) $(CAIROMM_LIB)
 	@if not exist vs$(VSVER)\$(CFG)\$(PLAT)\cairomm-tests md vs$(VSVER)\$(CFG)\$(PLAT)\cairomm-tests
-	$(CXX) $(CAIROMM_EX_CFLAGS) $(CFLAGS) /Fo$(@D)\cairomm-tests\ /Fd$(@D)\cairomm-tests\ $< /Fe$@ /link $(LDFLAGS) $(CAIROMM_LIB) $(LIBSIGC_LIB) $(CAIRO_LIB)
+	$(CXX) $(CAIROMM_TEST_CFLAGS) $(CFLAGS) /Fo$(@D)\cairomm-tests\ /Fd$(@D)\cairomm-tests\ $< /Fe$@ /link $(LDFLAGS) $(CAIROMM_LIB) $(LIBSIGC_LIB) $(CAIRO_LIB)
 	@-if exist $@.manifest mt /manifest $@.manifest /outputresource:$@;1
 
 clean:
