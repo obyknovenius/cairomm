@@ -26,8 +26,9 @@ using namespace boost::unit_test;
 template <typename T> inline
 int to_int(T e) { return static_cast<int>(e); }
 
-void
-test_create_toy ()
+BOOST_AUTO_TEST_SUITE( Cairo_FontFace )
+
+BOOST_AUTO_TEST_CASE(test_create_toy)
 {
   auto toy =
     Cairo::ToyFontFace::create("sans",
@@ -37,7 +38,7 @@ test_create_toy ()
   BOOST_CHECK_EQUAL (CAIRO_STATUS_SUCCESS, toy->get_status());
 }
 
-void test_toy_getters ()
+BOOST_AUTO_TEST_CASE(test_toy_getters)
 {
   auto toy =
     Cairo::ToyFontFace::create("sans",
@@ -50,7 +51,7 @@ void test_toy_getters ()
 }
 
 #if defined (CAIRO_HAS_FT_FONT) && defined (CAIRO_HAS_FC_FONT)
-void test_ft_font_face()
+BOOST_AUTO_TEST_CASE(test_ft_font_face)
 {
   // Does not throw an exception. Skip this test for now. /Kjell Ahlstedt 2020-04-21
   //auto invalid = FcPatternCreate();
@@ -73,7 +74,7 @@ void test_ft_font_face()
 #endif // CAIRO_HAS_FT_FONT && CAIRO_HAS_FC_FONT
 
 #ifdef CAIRO_HAS_WIN32_FONT
-void test_win32_font_face()
+BOOST_AUTO_TEST_CASE(test_win32_font_face)
 {
   LOGFONTW lf;
   lf.lfHeight = 10;
@@ -102,23 +103,4 @@ void test_win32_font_face()
 }
 #endif // CAIRO_HAS_WIN32_FONT
 
-
-test_suite*
-init_unit_test_suite(int argc, char* argv[])
-{
-  // compile even with -Werror
-  if (argc && argv) {}
-
-  test_suite* test= BOOST_TEST_SUITE( "Cairo::FontFace Tests" );
-
-  test->add (BOOST_TEST_CASE (&test_create_toy));
-  test->add (BOOST_TEST_CASE (&test_toy_getters));
-#if defined (CAIRO_HAS_FT_FONT) && defined (CAIRO_HAS_FC_FONT)
-  test->add (BOOST_TEST_CASE (&test_ft_font_face));
-#endif // CAIRO_HAS_FT_FONT
-#ifdef CAIRO_HAS_WIN32_FONT
-  test->add (BOOST_TEST_CASE (&test_win32_font_face));
-#endif // CAIRO_HAS_WIN32_FONT
-
-  return test;
-}
+BOOST_AUTO_TEST_SUITE_END()

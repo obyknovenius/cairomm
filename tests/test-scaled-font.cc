@@ -7,7 +7,9 @@ using namespace boost::unit_test;
 
 using namespace Cairo;
 
-void test_construction()
+BOOST_AUTO_TEST_SUITE( Cairo_ScaledFont )
+
+BOOST_AUTO_TEST_CASE(test_construction)
 {
   auto face = ToyFontFace::create("sans", ToyFontFace::Slant::NORMAL, ToyFontFace::Weight::NORMAL);
   Matrix identity;
@@ -20,7 +22,7 @@ void test_construction()
   BOOST_REQUIRE(font);
 }
 
-void test_text_to_glyphs()
+BOOST_AUTO_TEST_CASE(test_text_to_glyphs)
 {
   auto face = ToyFontFace::create("sans", ToyFontFace::Slant::NORMAL, ToyFontFace::Weight::NORMAL);
   Matrix identity;
@@ -37,7 +39,7 @@ void test_text_to_glyphs()
   BOOST_CHECK_EQUAL(3, clusters.size());
 }
 
-void test_scale_matrix()
+BOOST_AUTO_TEST_CASE(test_scale_matrix)
 {
   auto face = ToyFontFace::create("sans", ToyFontFace::Slant::NORMAL, ToyFontFace::Weight::NORMAL);
   Matrix m;
@@ -50,7 +52,7 @@ void test_scale_matrix()
   // no real test, just excercising the functionality
 }
 
-void test_get_font_face()
+BOOST_AUTO_TEST_CASE(test_get_font_face)
 {
   // this is to test for a bug where we were accidentally freeing the resulting
   // font face from a call to ScaledFont::get_font_face() when we didn't hold a
@@ -70,7 +72,7 @@ void test_get_font_face()
 }
 
 #if defined (CAIRO_HAS_FT_FONT) && defined (CAIRO_HAS_FC_FONT)
-void test_ft_scaled_font()
+BOOST_AUTO_TEST_CASE(test_ft_scaled_font)
 {
   // Does not throw an exception. Skip this test for now. /Kjell Ahlstedt 2020-04-21
   //auto invalid = FcPatternCreate();
@@ -104,22 +106,4 @@ void test_ft_scaled_font()
 }
 #endif // CAIRO_HAS_FT_FONT && CAIRO_HAS_FC_FONT
 
-
-test_suite*
-init_unit_test_suite(int argc, char* argv[])
-{
-  // compile even with -Werror
-  if (argc && argv) {}
-
-  test_suite* test= BOOST_TEST_SUITE( "Cairo::ScaledFont Tests" );
-
-  test->add(BOOST_TEST_CASE(&test_construction));
-  test->add(BOOST_TEST_CASE(&test_text_to_glyphs));
-  test->add(BOOST_TEST_CASE(&test_scale_matrix));
-  test->add(BOOST_TEST_CASE(&test_get_font_face));
-#if defined (CAIRO_HAS_FT_FONT) && defined (CAIRO_HAS_FC_FONT)
-  test->add(BOOST_TEST_CASE(&test_ft_scaled_font));
-#endif // CAIRO_HAS_FT_FONT
-
-  return test;
-}
+BOOST_AUTO_TEST_SUITE_END();

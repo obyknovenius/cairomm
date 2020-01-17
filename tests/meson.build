@@ -26,8 +26,9 @@ if can_test
       ex_sources += dir / src
     endforeach
 
+    boost_test_modname_flag = [ '-DBOOST_TEST_MODULE=@0@'.format(ex[1]) ]
     exe_file = executable(ex_name, ex_sources,
-      cpp_args: ex[3],
+      cpp_args: ex[3] + boost_test_modname_flag,
       dependencies: [cairomm_dep, test_dep],
       gui_app: false,
       build_by_default: build_tests,

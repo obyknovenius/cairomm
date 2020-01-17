@@ -11,7 +11,9 @@ using namespace Cairo;
 template <typename T> inline
 int to_int(T e) { return static_cast<int>(e); }
 
-void test_excercise()
+BOOST_AUTO_TEST_SUITE( Cairo_FontOptions )
+
+BOOST_AUTO_TEST_CASE(test_excercise)
 {
   // just excercise all of the methods
   Cairo::FontOptions options;
@@ -38,15 +40,4 @@ void test_excercise()
   BOOST_CHECK_EQUAL(to_int(Cairo::FontOptions::HintMetrics::OFF), to_int(metrics));
 }
 
-test_suite*
-init_unit_test_suite(int argc, char* argv[])
-{
-  // compile even with -Werror
-  if (argc && argv) {}
-
-  test_suite* test= BOOST_TEST_SUITE( "Cairo::Context Tests" );
-
-  test->add (BOOST_TEST_CASE (&test_excercise));
-
-  return test;
-}
+BOOST_AUTO_TEST_SUITE_END()

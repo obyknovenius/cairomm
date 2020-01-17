@@ -7,6 +7,7 @@
 
 #include <cfloat>
 #include <stdexcept>
+#include <iostream>
 #include <boost/test/unit_test.hpp>
 #include <boost/test/test_tools.hpp>
 #include <boost/test/floating_point_comparison.hpp>
@@ -73,7 +74,9 @@ protected:
   ImplTextUserFont() : count_text_to_glyphs(0) {}
 };
 
-void test_implement_text()
+BOOST_AUTO_TEST_SUITE( Cairo_UserFontFace )
+
+BOOST_AUTO_TEST_CASE(test_implement_text)
 {
   TestSetup setup;
   auto font = ImplTextUserFont::create();
@@ -100,7 +103,7 @@ protected:
   ImplUnicodeUserFont() : NullRenderUserFont(), count_unicode_to_glyph(0) {}
 };
 
-void test_implement_unicode()
+BOOST_AUTO_TEST_CASE(test_implement_unicode)
 {
   TestSetup setup;
   auto font = ImplTextUserFont::create();
@@ -142,7 +145,7 @@ protected:
   count_text_to_glyphs(0) {}
 };
 
-void test_implement_both()
+BOOST_AUTO_TEST_CASE(test_implement_both)
 {
   TestSetup setup;
   auto font = ImplBothUserFont::create();
@@ -166,7 +169,7 @@ protected:
   ImplNeitherUserFont() : NullRenderUserFont() {}
 };
 
-void test_implement_neither()
+BOOST_AUTO_TEST_CASE(test_implement_neither)
 {
   TestSetup setup;
   auto font = ImplNeitherUserFont::create();
@@ -193,7 +196,7 @@ protected:
   ImplInitUserFont() : NullRenderUserFont(), count_init(0) {}
 };
 
-void test_implement_init()
+BOOST_AUTO_TEST_CASE(test_implement_init)
 {
   TestSetup setup;
   auto font = ImplInitUserFont::create();
@@ -260,7 +263,7 @@ protected:
   m_flags(flags) {}
 };
 
-void test_user_font_exception()
+BOOST_AUTO_TEST_CASE(test_user_font_exception)
 {
   auto font =
     ExceptionUserFont::create(ExceptionUserFont::FLAG_INIT);
@@ -312,21 +315,4 @@ void test_user_font_exception()
   BOOST_CHECK (font->count_render_glyph > 0);
 }
 
-
-test_suite*
-init_unit_test_suite(int argc, char* argv[])
-{
-  // compile even with -Werror
-  if (argc && argv) {}
-
-  test_suite* test= BOOST_TEST_SUITE( "Cairo::UserFontFace Tests" );
-
-  test->add (BOOST_TEST_CASE (&test_implement_text));
-  test->add (BOOST_TEST_CASE (&test_implement_unicode));
-  test->add (BOOST_TEST_CASE (&test_implement_both));
-  test->add (BOOST_TEST_CASE (&test_implement_neither));
-  test->add (BOOST_TEST_CASE (&test_implement_init));
-  test->add (BOOST_TEST_CASE (&test_user_font_exception));
-
-  return test;
-}
+BOOST_AUTO_TEST_SUITE_END()

@@ -13,14 +13,16 @@ ErrorStatus test_slot(const unsigned char* /*data*/, unsigned int /*len*/)
   return CAIRO_STATUS_SUCCESS;
 }
 
-void test_write_to_png_stream()
+BOOST_AUTO_TEST_SUITE( Cairo_Surface )
+
+BOOST_AUTO_TEST_CASE(test_write_to_png_stream)
 {
   auto surface = ImageSurface::create(Surface::Format::ARGB32, 1, 1);
   surface->write_to_png_stream(sigc::ptr_fun(test_slot));
   BOOST_CHECK(test_slot_called > 0);
 }
 
-void test_pdf_constructor_slot()
+BOOST_AUTO_TEST_CASE(test_pdf_constructor_slot)
 {
   test_slot_called = 0;
   auto pdf = PdfSurface::create_for_stream(sigc::ptr_fun(&test_slot), 1, 1);
@@ -29,7 +31,7 @@ void test_pdf_constructor_slot()
   BOOST_CHECK(test_slot_called > 0);
 }
 
-void test_ps_constructor_slot()
+BOOST_AUTO_TEST_CASE(test_ps_constructor_slot)
 {
   test_slot_called = 0;
   auto ps = PsSurface::create_for_stream(sigc::ptr_fun(&test_slot), 1, 1);
@@ -38,7 +40,7 @@ void test_ps_constructor_slot()
   BOOST_CHECK(test_slot_called > 0);
 }
 
-void test_svg_constructor_slot()
+BOOST_AUTO_TEST_CASE(test_svg_constructor_slot)
 {
   test_slot_called = 0;
   auto svg = SvgSurface::create_for_stream(sigc::ptr_fun(&test_slot), 1, 1);
@@ -57,7 +59,7 @@ static ErrorStatus test_read_func(unsigned char* data, unsigned int len)
   return CAIRO_STATUS_READ_ERROR;
 }
 
-void test_create_from_png()
+BOOST_AUTO_TEST_CASE(test_create_from_png)
 {
   RefPtr<ImageSurface> surface;
   // try the sigc::slot version
@@ -67,7 +69,7 @@ void test_create_from_png()
   BOOST_CHECK(test_read_func_called > 0);
 }
 
-void test_ps_eps()
+BOOST_AUTO_TEST_CASE(test_ps_eps)
 {
   auto ps = PsSurface::create("test.ps", 1, 1);
   // check the initial value
@@ -78,7 +80,7 @@ void test_ps_eps()
   BOOST_CHECK_EQUAL(ps->get_eps(), !result);
 }
 
-void test_content()
+BOOST_AUTO_TEST_CASE(test_content)
 {
   auto surface = ImageSurface::create(Surface::Format::ARGB32, 1, 1);
   BOOST_CHECK_EQUAL(surface->get_content(), CONTENT_COLOR_ALPHA);
@@ -87,7 +89,7 @@ void test_content()
   BOOST_CHECK_EQUAL(similar->get_content(), CONTENT_ALPHA);
 }
 
-void test_fallback_resolution()
+BOOST_AUTO_TEST_CASE(test_fallback_resolution)
 {
   auto surface = ImageSurface::create(Surface::Format::ARGB32, 1, 1);
   double x, y;
@@ -99,7 +101,7 @@ void test_fallback_resolution()
   BOOST_CHECK_EQUAL(y, new_y);
 }
 
-void test_show_text_glyphs()
+BOOST_AUTO_TEST_CASE(test_show_text_glyphs)
 {
   // image surface doesn't support show_text_glyphs
   Cairo::RefPtr<Cairo::Surface> surf = Cairo::ImageSurface::create(Cairo::Surface::Format::ARGB32, 10, 10);
@@ -109,22 +111,4 @@ void test_show_text_glyphs()
   BOOST_CHECK(surf->has_show_text_glyphs());
 }
 
-test_suite*
-init_unit_test_suite(int argc, char* argv[])
-{
-  // compile even with -Werror
-  if (argc && argv) {}
-
-  test_suite* test= BOOST_TEST_SUITE( "Cairo::Surface Tests" );
-
-  test->add (BOOST_TEST_CASE (&test_write_to_png_stream));
-  test->add (BOOST_TEST_CASE (&test_pdf_constructor_slot));
-  test->add (BOOST_TEST_CASE (&test_ps_constructor_slot));
-  test->add (BOOST_TEST_CASE (&test_svg_constructor_slot));
-  test->add (BOOST_TEST_CASE (&test_create_from_png));
-  test->add (BOOST_TEST_CASE (&test_ps_eps));
-  test->add (BOOST_TEST_CASE (&test_content));
-  test->add (BOOST_TEST_CASE (&test_show_text_glyphs));
-
-  return test;
-}
+BOOST_AUTO_TEST_SUITE_END()
