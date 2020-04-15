@@ -65,7 +65,7 @@ namespace Cairo
  *
  * Surfaces are reference-counted objects that should be used via Cairo::RefPtr.
  */
-class Surface
+class CAIROMM_API Surface
 {
 public:
   /**
@@ -616,7 +616,7 @@ protected:
  *
  * Note that like all surfaces, an ImageSurface is a reference-counted object that should be used via Cairo::RefPtr.
  */
-class ImageSurface : public Surface
+class CAIROMM_API ImageSurface : public Surface
 {
 protected:
   //TODO?: Surface(cairo_surface_t *target);
@@ -790,7 +790,7 @@ public:
  * Note that like all surfaces, a RecordingSurface is a reference-counted object
  * that should be used via Cairo::RefPtr.
  */
-class RecordingSurface : public Surface
+class CAIROMM_API RecordingSurface : public Surface
 {
 public:
 
@@ -882,7 +882,7 @@ typedef enum
  * @note For this Surface to be available, cairo must have been compiled with
  * PDF support
  */
-class PdfSurface : public Surface
+class CAIROMM_API PdfSurface : public Surface
 {
 public:
 
@@ -983,7 +983,7 @@ typedef enum {
  * @note For this Surface to be available, cairo must have been compiled with
  * PostScript support
  */
-class PsSurface : public Surface
+class CAIROMM_API PsSurface : public Surface
 {
 public:
 
@@ -1136,7 +1136,7 @@ typedef enum
  * @note For this Surface to be available, cairo must have been compiled with
  * SVG support
  */
-class SvgSurface : public Surface
+class CAIROMM_API SvgSurface : public Surface
 {
 public:
 
@@ -1220,7 +1220,7 @@ public:
  * @warning This is an experimental surface.  It is not yet marked as a fully
  * supported surface by the cairo library
  */
-class GlitzSurface : public Surface
+class CAIROMM_API GlitzSurface : public Surface
 {
 
 public:
