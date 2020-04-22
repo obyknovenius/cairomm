@@ -7,6 +7,10 @@
 using namespace boost::unit_test;
 using namespace Cairo;
 
+// Converts an enum class variable to int.
+template <typename T> inline
+int to_int(T e) { return static_cast<int>(e); }
+
 void test_excercise()
 {
   // just excercise all of the methods
@@ -25,13 +29,13 @@ void test_excercise()
   auto order = options.get_subpixel_order();
   BOOST_CHECK_EQUAL(Cairo::SUBPIXEL_ORDER_DEFAULT, order);
 
-  options.set_hint_style(Cairo::HINT_STYLE_SLIGHT);
+  options.set_hint_style(Cairo::FontOptions::HintStyle::SLIGHT);
   auto hint_style = options.get_hint_style();
-  BOOST_CHECK_EQUAL(Cairo::HINT_STYLE_SLIGHT, hint_style);
+  BOOST_CHECK_EQUAL(to_int(Cairo::FontOptions::HintStyle::SLIGHT), to_int(hint_style));
 
-  options.set_hint_metrics(Cairo::HINT_METRICS_OFF);
+  options.set_hint_metrics(Cairo::FontOptions::HintMetrics::OFF);
   auto metrics = options.get_hint_metrics();
-  BOOST_CHECK_EQUAL(Cairo::HINT_METRICS_OFF, metrics);
+  BOOST_CHECK_EQUAL(to_int(Cairo::FontOptions::HintMetrics::OFF), to_int(metrics));
 }
 
 test_suite*

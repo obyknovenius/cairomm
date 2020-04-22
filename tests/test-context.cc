@@ -1,4 +1,3 @@
-// vim: ts=2 sw=2 et
 /*
  * These tests are of limited usefulness.  In fact, you might even say that
  * they're not really tests at all.  But I felt that it would be useful to have
@@ -15,8 +14,12 @@ using namespace boost::unit_test;
 #include <cairomm/scaledfont.h>
 
 #define CREATE_CONTEXT(varname) \
-  auto surf = Cairo::ImageSurface::create(Cairo::FORMAT_ARGB32, 10, 10); \
+  auto surf = Cairo::ImageSurface::create(Cairo::Surface::Format::ARGB32, 10, 10); \
   auto cr = Cairo::Context::create(surf);
+
+// Converts an enum class variable to int.
+template <typename T> inline
+int to_int(T e) { return static_cast<int>(e); }
 
 void
 test_dashes ()
@@ -73,10 +76,10 @@ void
 test_operator ()
 {
   CREATE_CONTEXT(cr);
-  cr->set_operator (Cairo::OPERATOR_ATOP);
-  BOOST_CHECK_EQUAL (Cairo::OPERATOR_ATOP, cr->get_operator ());
-  cr->set_operator (Cairo::OPERATOR_CLEAR);
-  BOOST_CHECK_EQUAL (Cairo::OPERATOR_CLEAR, cr->get_operator ());
+  cr->set_operator (Cairo::Context::Operator::ATOP);
+  BOOST_CHECK_EQUAL (to_int(Cairo::Context::Operator::ATOP), to_int(cr->get_operator()));
+  cr->set_operator (Cairo::Context::Operator::CLEAR);
+  BOOST_CHECK_EQUAL (to_int(Cairo::Context::Operator::CLEAR), to_int(cr->get_operator()));
 }
 
 void
@@ -91,7 +94,7 @@ test_source ()
   cr->set_source (solid_pattern);
   {
     auto retrieved_solid =
-      Cairo::RefPtr<Cairo::SolidPattern>::cast_dynamic(cr->get_source ());
+      std::dynamic_pointer_cast<Cairo::SolidPattern>(cr->get_source ());
     BOOST_REQUIRE (retrieved_solid);
     double r, g, b, a;
     retrieved_solid->get_rgba (r, g, b, a);
@@ -100,16 +103,16 @@ test_source ()
     BOOST_CHECK_EQUAL (0.25, b);
 
     // now try for const objects..
-    auto cr2 = cr;
+    auto cr2 = std::const_pointer_cast<const Cairo::Context>(cr);
     auto retrieved_solid2 =
-      Cairo::RefPtr<const Cairo::SolidPattern>::cast_dynamic(cr2->get_source ());
+      std::dynamic_pointer_cast<const Cairo::SolidPattern>(cr2->get_source ());
     BOOST_REQUIRE (retrieved_solid2);
   }
 
   cr->set_source (gradient_pattern);
   {
     auto retrieved_linear =
-      Cairo::RefPtr<Cairo::LinearGradient>::cast_dynamic(cr->get_source ());
+      std::dynamic_pointer_cast<Cairo::LinearGradient>(cr->get_source ());
     BOOST_REQUIRE (retrieved_linear);
     double x0, x1, y0, y1;
     retrieved_linear->get_linear_points (x0, y0, x1, y1);
@@ -122,7 +125,7 @@ test_source ()
   cr->set_source_rgb (1.0, 0.5, 0.25);
   {
     auto solid =
-      Cairo::RefPtr<Cairo::SolidPattern>::cast_dynamic(cr->get_source ());
+      std::dynamic_pointer_cast<Cairo::SolidPattern>(cr->get_source ());
     BOOST_REQUIRE (solid);
     double rx, gx, bx, ax;
     solid->get_rgba (rx, gx, bx, ax);
@@ -133,7 +136,7 @@ test_source ()
   cr->set_source_rgba (0.1, 0.3, 0.5, 0.7);
   {
     auto solid =
-      Cairo::RefPtr<Cairo::SolidPattern>::cast_dynamic(cr->get_source ());
+      std::dynamic_pointer_cast<Cairo::SolidPattern>(cr->get_source ());
     BOOST_REQUIRE (solid);
     double rx, gx, bx, ax;
     solid->get_rgba (rx, gx, bx, ax);
@@ -167,10 +170,10 @@ void
 test_fill_rule ()
 {
   CREATE_CONTEXT(cr);
-  cr->set_fill_rule (Cairo::FILL_RULE_EVEN_ODD);
-  BOOST_CHECK_EQUAL (Cairo::FILL_RULE_EVEN_ODD, cr->get_fill_rule ());
-  cr->set_fill_rule (Cairo::FILL_RULE_WINDING);
-  BOOST_CHECK_EQUAL (Cairo::FILL_RULE_WINDING, cr->get_fill_rule ());
+  cr->set_fill_rule (Cairo::Context::FillRule::EVEN_ODD);
+  BOOST_CHECK_EQUAL (to_int(Cairo::Context::FillRule::EVEN_ODD), to_int(cr->get_fill_rule()));
+  cr->set_fill_rule (Cairo::Context::FillRule::WINDING);
+  BOOST_CHECK_EQUAL (to_int(Cairo::Context::FillRule::WINDING), to_int(cr->get_fill_rule()));
 }
 
 void
@@ -187,20 +190,20 @@ void
 test_line_cap ()
 {
   CREATE_CONTEXT(cr);
-  cr->set_line_cap (Cairo::LINE_CAP_BUTT);
-  BOOST_CHECK_EQUAL (Cairo::LINE_CAP_BUTT, cr->get_line_cap ());
-  cr->set_line_cap (Cairo::LINE_CAP_ROUND);
-  BOOST_CHECK_EQUAL (Cairo::LINE_CAP_ROUND, cr->get_line_cap ());
+  cr->set_line_cap (Cairo::Context::LineCap::BUTT);
+  BOOST_CHECK_EQUAL (to_int(Cairo::Context::LineCap::BUTT), to_int(cr->get_line_cap()));
+  cr->set_line_cap (Cairo::Context::LineCap::ROUND);
+  BOOST_CHECK_EQUAL (to_int(Cairo::Context::LineCap::ROUND), to_int(cr->get_line_cap()));
 }
 
 void
 test_line_join ()
 {
   CREATE_CONTEXT(cr);
-  cr->set_line_join (Cairo::LINE_JOIN_BEVEL);
-  BOOST_CHECK_EQUAL (Cairo::LINE_JOIN_BEVEL, cr->get_line_join ());
-  cr->set_line_join (Cairo::LINE_JOIN_MITER);
-  BOOST_CHECK_EQUAL (Cairo::LINE_JOIN_MITER, cr->get_line_join ());
+  cr->set_line_join (Cairo::Context::LineJoin::BEVEL);
+  BOOST_CHECK_EQUAL (to_int(Cairo::Context::LineJoin::BEVEL), to_int(cr->get_line_join()));
+  cr->set_line_join (Cairo::Context::LineJoin::MITER);
+  BOOST_CHECK_EQUAL (to_int(Cairo::Context::LineJoin::MITER), to_int(cr->get_line_join()));
 }
 
 void
@@ -226,6 +229,7 @@ test_matrix ()
   cr->set_identity_matrix ();
   cr->get_matrix (matrix);
   auto m2 = cr->get_matrix ();
+  (void)m2; // Silence a warning (unused-but-set-variable)
 }
 
 void
@@ -299,23 +303,23 @@ test_current_point ()
 void
 test_target ()
 {
-  auto surf = Cairo::ImageSurface::create(Cairo::FORMAT_ARGB32, 10, 10); \
+  auto surf = Cairo::ImageSurface::create(Cairo::Surface::Format::ARGB32, 10, 10); \
   auto cr = Cairo::Context::create(surf);
 
   auto target_surface =
-    Cairo::RefPtr<Cairo::ImageSurface>::cast_dynamic(cr->get_target ());
+    std::dynamic_pointer_cast<Cairo::ImageSurface>(cr->get_target ());
   auto bad_surface =
-    Cairo::RefPtr<Cairo::PdfSurface>::cast_dynamic(cr->get_target ());
+    std::dynamic_pointer_cast<Cairo::PdfSurface>(cr->get_target ());
   BOOST_CHECK (target_surface);
   BOOST_CHECK (!bad_surface);
 
   // now check for const objects...
-  auto cr2 = Cairo::Context::create(surf);
+  auto cr2 = std::const_pointer_cast<const Cairo::Context>(Cairo::Context::create(surf));
 
   auto target_surface2 =
-    Cairo::RefPtr<const Cairo::ImageSurface>::cast_dynamic(cr2->get_target ());
+    std::dynamic_pointer_cast<const Cairo::ImageSurface>(cr2->get_target ());
   auto bad_surface2 =
-    Cairo::RefPtr<const Cairo::PdfSurface>::cast_dynamic(cr2->get_target ());
+    std::dynamic_pointer_cast<const Cairo::PdfSurface>(cr2->get_target ());
   BOOST_CHECK (target_surface2);
   BOOST_CHECK (!bad_surface2);
 }
@@ -324,14 +328,14 @@ void test_scaled_font()
 {
   CREATE_CONTEXT (cr);
   auto face = Cairo::ToyFontFace::create("sans",
-                                                                      Cairo::FONT_SLANT_NORMAL,
-                                                                      Cairo::FONT_WEIGHT_NORMAL);
+                                          Cairo::ToyFontFace::Slant::NORMAL,
+                                          Cairo::ToyFontFace::Weight::NORMAL);
   Cairo::Matrix identity;
   cairo_matrix_init_identity(&identity);
   auto font = Cairo::ScaledFont::create(face,
-                                                                    identity,
-                                                                    identity,
-                                                                    Cairo::FontOptions());
+                                        identity,
+                                        identity,
+                                        Cairo::FontOptions());
   BOOST_CHECK_NO_THROW(cr->set_scaled_font(font));
   // There's no operator== for ScaledFont, so I'm not sure if there's a way to
   // compare whether the font we get form get() is the same as the one we set

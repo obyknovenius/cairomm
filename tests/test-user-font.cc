@@ -1,4 +1,3 @@
-// vim: ts=2 sw=2 et
 /*
  * These tests are of limited usefulness.  In fact, you might even say that
  * they're not really tests at all.  But I felt that it would be useful to have
@@ -24,7 +23,7 @@ struct TestSetup
 {
   TestSetup()
   {
-    surface = ImageSurface::create(Cairo::FORMAT_ARGB32, 100, 100);
+    surface = ImageSurface::create(Cairo::Surface::Format::ARGB32, 100, 100);
     cr = Cairo::Context::create(surface);
   }
 
@@ -40,7 +39,7 @@ public:
     render_glyph(const RefPtr<ScaledFont>& /*scaled_font*/,
                  unsigned long /*glyph*/,
                  const RefPtr<Context>& /*cr*/,
-                 TextExtents& /*metrics*/)
+                 TextExtents& /*metrics*/) override
     { ++count_render_glyph; return CAIRO_STATUS_SUCCESS; }
 
   int count_render_glyph;
@@ -55,7 +54,7 @@ protected:
 class ImplTextUserFont: public NullRenderUserFont
 {
 public:
-  static RefPtr<ImplTextUserFont> create() { return make_refptr_for_insance<ImplTextUserFont>(new ImplTextUserFont());};
+  static RefPtr<ImplTextUserFont> create() { return make_refptr_for_instance<ImplTextUserFont>(new ImplTextUserFont());};
   ErrorStatus text_to_glyphs(const RefPtr<ScaledFont>& /*scaled_font*/,
                                      const std::string& /*utf8*/,
                                      std::vector<Glyph>& glyphs,
@@ -213,7 +212,7 @@ public:
   render_glyph(const RefPtr<ScaledFont>& /*scaled_font*/,
                unsigned long /*glyph*/,
                const RefPtr<Context>& /*cr*/,
-               TextExtents& /*metrics*/)
+               TextExtents& /*metrics*/) override
   {
     count_render_glyph++;
     if (m_flags & FLAG_RENDER)
@@ -224,7 +223,7 @@ public:
   ErrorStatus
   unicode_to_glyph(const RefPtr<ScaledFont>& /*scaled_font*/,
                                        unsigned long unicode,
-                                       unsigned long& glyph)
+                                       unsigned long& glyph) override
   {
     count_unicode_to_glyph++;
     if (m_flags & FLAG_UNICODE)
