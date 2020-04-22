@@ -127,19 +127,19 @@ AC_CONFIG_FILES([Makefile
                  examples/Makefile
                  docs/Makefile
                  docs/reference/Doxyfile
-                 data/cairomm-1.16.pc
-                 data/cairomm-ft-1.16.pc
-                 data/cairomm-pdf-1.16.pc
-                 data/cairomm-png-1.16.pc
-                 data/cairomm-ps-1.16.pc
-                 data/cairomm-quartz-1.16.pc
-                 data/cairomm-quartz-font-1.16.pc
-                 data/cairomm-quartz-image-1.16.pc
-                 data/cairomm-svg-1.16.pc
-                 data/cairomm-win32-1.16.pc
-                 data/cairomm-win32-font-1.16.pc
-                 data/cairomm-xlib-1.16.pc
-                 data/cairomm-xlib-xrender-1.16.pc
+                 data/${CAIROMM_MODULE_NAME}.pc:data/cairomm.pc.in
+                 data/cairomm-ft-${CAIROMM_API_VERSION}.pc:data/cairomm-ft.pc.in
+                 data/cairomm-pdf-${CAIROMM_API_VERSION}.pc:data/cairomm-pdf.pc.in
+                 data/cairomm-png-${CAIROMM_API_VERSION}.pc:data/cairomm-png.pc.in
+                 data/cairomm-ps-${CAIROMM_API_VERSION}.pc:data/cairomm-ps.pc.in
+                 data/cairomm-quartz-${CAIROMM_API_VERSION}.pc:data/cairomm-quartz.pc.in
+                 data/cairomm-quartz-font-${CAIROMM_API_VERSION}.pc:data/cairomm-quartz-font.pc.in
+                 data/cairomm-quartz-image-${CAIROMM_API_VERSION}.pc:data/cairomm-quartz-image.pc.in
+                 data/cairomm-svg-${CAIROMM_API_VERSION}.pc:data/cairomm-svg.pc.in
+                 data/cairomm-win32-${CAIROMM_API_VERSION}.pc:data/cairomm-win32.pc.in
+                 data/cairomm-win32-font-${CAIROMM_API_VERSION}.pc:data/cairomm-win32-font.pc.in
+                 data/cairomm-xlib-${CAIROMM_API_VERSION}.pc:data/cairomm-xlib.pc.in
+                 data/cairomm-xlib-xrender-${CAIROMM_API_VERSION}.pc:data/cairomm-xlib-xrender.pc.in
                  MSVC_NMake/cairomm/cairomm.rc])
 
 AC_CONFIG_COMMANDS([MSVC_NMake/cairomm/cairommconfig.h],
