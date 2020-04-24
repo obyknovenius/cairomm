@@ -93,7 +93,7 @@ void test_win32_font_face()
 
   Cairo::RefPtr<Cairo::Win32FontFace> fc(Cairo::Win32FontFace::create(&lf));
   BOOST_CHECK(fc);
-  Cairo::RefPtr<Cairo::ImageSurface> sfc(Cairo::ImageSurface::create(Cairo::FORMAT_RGB24, 100, 100));
+  Cairo::RefPtr<Cairo::ImageSurface> sfc(Cairo::ImageSurface::create(Cairo::Surface::Format::RGB24, 100, 100));
   Cairo::RefPtr<Cairo::Context> cr(Cairo::Context::create(sfc));
   cr->translate(0.0, 50.0);
   cr->set_source_rgb(1.0, 1.0, 1.0);
