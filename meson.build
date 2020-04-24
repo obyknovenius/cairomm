@@ -93,9 +93,14 @@ install_pkgconfigdir = install_libdir / 'pkgconfig'
 sigcxx_req = '>= 3.0.0'
 cairo_req = '>= 1.10.0'
 
-# There are pkg-config files for sigc++ and cairo on MSVC, so just use that.
+# There are pkg-config files for sigc++ on MSVC, so just use that.
 sigcxx_dep = dependency('sigc++-3.0', version: sigcxx_req)
-cairo_dep = dependency('cairo', version: cairo_req)
+cairo_dep = dependency('cairo', version: cairo_req, required: not is_msvc)
+
+# This is clearly on Windows...
+if not cairo_dep.found()
+  cairo_dep = cpp_compiler.find_library('cairo', has_headers: [ 'cairo.h', 'cairo-win32.h' ])
+endif
 
 cairomm_build_dep = [sigcxx_dep, cairo_dep]
 cairomm_requires = [
