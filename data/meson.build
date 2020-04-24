@@ -30,7 +30,25 @@ foreach cairomm_mod : ['ft', 'pdf', 'png', 'ps', 'quartz', 'quartz-font',
     'quartz-image', 'svg', 'win32', 'win32-font', 'xlib', 'xlib-xrender']
 
   # Install the module only if there is a corresponding cairo module.
-  do_install = dependency('cairo-' + cairomm_mod, required: false).found()
+  if cairo_dep.type_name() == 'pkgconfig'
+    do_install = dependency('cairo-' + cairomm_mod, required: false).found()
+  else
+    if cairomm_mod == 'png'
+      do_install = cpp_compiler.has_function('cairo_surface_write_to_png',
+                                             prefix: '#include <cairo.h>',
+                                             dependencies: cairo_dep)
+    elif cairomm_mod == 'quartz-font'
+      do_install = cpp_compiler.has_function('cairo_quartz_font_face_create_for_cgfont',
+                                             prefix: '#include <cairo-quartz.h>',
+                                             dependencies: cairo_dep)
+    elif cairomm_mod == 'win32-font'
+      do_install = cpp_compiler.has_function('cairo_win32_font_face_create_for_hfont',
+                                             prefix: '#include <cairo-win32.h>',
+                                             dependencies: cairo_dep)
+    else
+      do_install = cpp_compiler.has_header('cairo-@0@.h'.format(cairomm_mod))
+    endif
+  endif
   pc_file = 'cairomm-' + cairomm_mod
   configure_file(
     input: pc_file + '.pc.in',
