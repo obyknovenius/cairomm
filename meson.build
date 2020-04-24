@@ -116,6 +116,11 @@ if is_msvc
          'Visual Studio 2017 15.7 or later is required')
 endif
 
+# Needed for M_PI on Visual Studio and some MinGW versions
+if host_machine.system() == 'windows'
+  add_project_arguments('-D_USE_MATH_DEFINES', language: 'cpp')
+endif
+
 # Some dependencies are required only in maintainer mode and/or
 # if documentation shall be built.
 mm_common_get = find_program('mm-common-get', required: false)
