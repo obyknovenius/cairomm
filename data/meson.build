@@ -16,6 +16,7 @@ pkg_conf_data.set('PACKAGE_VERSION', meson.project_version())
 pkg_conf_data.set('CAIROMM_MODULE_NAME', cairomm_pcname)
 pkg_conf_data.set('CAIROMM_API_VERSION', cairomm_api_version)
 pkg_conf_data.set('CAIROMM_MODULES', cairomm_requires)
+pkg_conf_data.set('CAIROMM_EXTRA_LIBS', cairomm_extra_libs)
 
 configure_file(
   input: 'cairomm.pc.in',

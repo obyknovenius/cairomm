@@ -105,8 +105,14 @@ endif
 cairomm_build_dep = [sigcxx_dep, cairo_dep]
 cairomm_requires = [
   'sigc++-3.0', sigcxx_req,
-  'cairo', cairo_req,
 ]
+
+cairomm_extra_libs = ''
+if cairo_dep.type_name() == 'pkgconfig'
+  cairomm_requires += [ 'cairo', cairo_req ]
+else
+  cairomm_extra_libs = '-lcairo'
+endif
 cairomm_requires = ' '.join(cairomm_requires)
 
 if is_msvc
