@@ -26,7 +26,8 @@ CAIROMM_BASE_CFLAGS =			\
 	/D_CRT_NONSTDC_NO_WARNINGS	\
 	/I.. /I.\cairomm		\
 	/D_USE_MATH_DEFINES		\
-	/wd4530 /std:c++17
+	/EHsc /utf-8	\
+	/wd4530 /wd4828 /std:c++17
 
 CAIROMM_EXTRA_INCLUDES =	\
 	/I$(PREFIX)\include\sigc++-$(LIBSIGC_MAJOR_VERSION).$(LIBSIGC_MINOR_VERSION)	\
