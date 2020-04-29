@@ -14,3 +14,5 @@ option('build-examples', type: 'boolean', value: true,
   description: 'Build example programs')
 option('build-tests', type: 'combo', choices: ['false', 'if-dependencies-found', 'true'],
   value: 'if-dependencies-found', description: 'Build test programs (requires Boost Test and Fontconfig or Windows)')
+option('boost-shared', type: 'boolean',
+  value: false, description: 'Use shared version of boost')

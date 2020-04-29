@@ -142,8 +142,11 @@ dot = find_program('dot', required: build_documentation) # Used by Doxygen
 xsltproc = find_program('xsltproc', required: build_documentation)
 
 # Some dependencies are required only for building the test programs.
+USE_SHARED_BOOST = get_option('boost-shared') # Use shared Boost::Test?
+
 boost_unit_test_framework_dep = dependency('boost', modules: 'unit_test_framework',
-  static: true, version: '>=1.33.1', required: false)
+  static: not USE_SHARED_BOOST, version: '>=1.33.1', required: false)
+
 fontconfig_dep = dependency('fontconfig', required: false)
 test_dep = [ boost_unit_test_framework_dep, fontconfig_dep]
 can_test = boost_unit_test_framework_dep.found() and \
