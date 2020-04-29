@@ -192,7 +192,7 @@ elif warning_level == 'max' or warning_level == 'fatal'
   if is_msvc
     warning_flags = ['/W4']
   else
-    warning_flags = '-pedantic -Wall -Wextra -Wformat-security -Wsuggest-override'.split()
+    warning_flags = '-pedantic -Wall -Wextra -Wformat-security -Wsuggest-override -Wzero-as-null-pointer-constant'.split()
   endif
   if warning_level == 'fatal'
     if is_msvc
@@ -288,6 +288,7 @@ summary = [
   'Build HTML documentation: @0@@1@'.format(build_documentation_opt, real_build_documentation),
   '  Build example programs: @0@'.format(build_examples),
   '     Build test programs: @0@@1@'.format(build_tests_opt, real_build_tests),
+  '   Use shared Boost Test: @0@'.format(USE_SHARED_BOOST),
   'Directories:',
   '                  prefix: @0@'.format(install_prefix),
   '              includedir: @0@'.format(install_prefix / install_includedir),
