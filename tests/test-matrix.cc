@@ -31,7 +31,7 @@ std::ostream& operator<<(std::ostream& out, const Cairo::Matrix& matrix)
     << matrix.y0 << " ]";
 }
 
-BOOST_AUTO_TEST_SUITE( Cairo_Matrix ) 
+BOOST_AUTO_TEST_SUITE( Cairo_Matrix )
 
 BOOST_AUTO_TEST_CASE(test_constructors)
 {
