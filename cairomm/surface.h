@@ -22,17 +22,7 @@
 #include <string>
 #include <vector>
 
-/* following is required for OS X */
-
-#ifdef nil
-#undef nil
 #include <sigc++/slot.h>
-#define nil NULL
-#else
-#include <sigc++/slot.h>
-#endif
-
-/* end OS X */
 
 #include <cairomm/enums.h>
 #include <cairomm/exception.h>
