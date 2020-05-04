@@ -3,10 +3,6 @@
 # Items in here should not need to be edited unless
 # one is maintaining the NMake build files.
 
-# Generate .def files
-vs$(VSVER)\$(CFG)\$(PLAT)\cairomm\cairomm.def: $(GENDEF) $(cairomm_OBJS)
-	vs$(VSVER)\$(CFG)\$(PLAT)\gendef.exe $@ $(CAIROMM_LIBNAME) vs$(VSVER)\$(CFG)\$(PLAT)\cairomm\*.obj
-
 # Generate pre-generated resources and configuration headers (builds from GIT)
 prep-git-build: pkg-ver.mak
 	$(MAKE) /f Makefile.vc CFG=$(CFG) GENERATE_VERSIONED_FILES=1 cairomm\cairomm.rc cairomm\cairommconfig.h

@@ -27,7 +27,8 @@ CAIROMM_BASE_CFLAGS =			\
 	/I.. /I.\cairomm		\
 	/D_USE_MATH_DEFINES		\
 	/EHsc /utf-8	\
-	/wd4530 /wd4828 /std:c++17
+	/wd4251 /wd4275 /wd4530	\
+	/std:c++17
 
 CAIROMM_EXTRA_INCLUDES =	\
 	/I$(PREFIX)\include\sigc++-$(LIBSIGC_MAJOR_VERSION).$(LIBSIGC_MINOR_VERSION)	\
@@ -62,7 +63,6 @@ CAIROMM_LIBNAME = cairomm-vc$(VSVER)0$(DEBUG_SUFFIX)-$(CAIROMM_MAJOR_VERSION)_$(
 CAIROMM_DLL = vs$(VSVER)\$(CFG)\$(PLAT)\$(CAIROMM_LIBNAME).dll
 CAIROMM_LIB = vs$(VSVER)\$(CFG)\$(PLAT)\$(CAIROMM_LIBNAME).lib
 
-GENDEF = vs$(VSVER)\$(CFG)\$(PLAT)\gendef.exe
 CAIRO_LIB = cairo.lib
 
 !ifdef BOOST_DLL
