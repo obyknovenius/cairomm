@@ -10,7 +10,6 @@ msvc_nmake_data =		\
 	detectenv-msvc.mak	\
 	info-msvc.mak		\
 	install.mak		\
-	gendef/gendef.cc	\
 	generate-msvc.mak	\
 	Makefile.vc		\
 	README

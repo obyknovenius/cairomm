@@ -1,7 +1,7 @@
 # cairomm
 
 # Input: cairomm_build_dep, cairomm_pcname, cairomm_libversion, cairomm_rc,
-#        is_msvc, gendef
+#        is_msvc
 # Output: source_h_files, cairomm_dep
 
 # There are no built source files in cairomm.
