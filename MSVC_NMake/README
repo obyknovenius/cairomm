@@ -9,6 +9,10 @@ Building cairomm-1.16 with Visual Studio .NET 2017 or later
 * Now the built DLL and .lib files use the toolset version ('vc141' for Visual Studio 2017 and 'vc142' for Visual Studio
   2019) instead of the Visual Studio version ('vc150' for Visual Studio 2017) by default.  If using the old naming style,
   please note that libsigc++-3.x must be built with this option enabled as well, if building it with NMake.
+  For the Meson builds, pass in the option '-Dmsvc14x-parallel-installable=false' to the Meson configure command line
+  to avoid having the toolset version in the final DLL and .lib filenames; again, this is only recommended if it is
+  inconvenient to re-build the dependent code, and this option should be used when building items that depend on cairomm,
+  if this option is provided.
 
 Cedric Gustin
 08/18/2006
