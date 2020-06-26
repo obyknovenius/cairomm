@@ -79,6 +79,8 @@ build_documentation = build_documentation_opt == 'true' or \
 build_examples = get_option('build-examples')
 build_tests_opt = get_option('build-tests')
 
+use_msvc14x_toolset_ver = get_option('msvc14x-parallel-installable')
+
 # Installation directories are relative to {prefix}.
 install_prefix = get_option('prefix')
 install_includedir = get_option('includedir')
@@ -207,6 +209,9 @@ endif
 warning_flags = cpp_compiler.get_supported_arguments(warning_flags)
 add_project_arguments(warning_flags, language: 'cpp')
 
+# Add toolset version in builds done with Visual Studio 2017 or later
+msvc14x_toolset_ver = ''
+
 # MSVC: Ignore warnings that aren't really harmful, but make those
 #       that should not be overlooked stand out.
 if is_msvc
@@ -214,7 +219,16 @@ if is_msvc
     disabled_warning = cpp_compiler.get_supported_arguments(wd)
     add_project_arguments(disabled_warning, language: 'cpp')
   endforeach
+  if use_msvc14x_toolset_ver
+    if cpp_compiler.version().version_compare('>=19.20')
+      msvc14x_toolset_ver = '-vc142'
+    elif cpp_compiler.version().version_compare('>=19.10')
+      msvc14x_toolset_ver = '-vc141'
+    endif
+  endif
 endif
+
+cairomm_libname = meson.project_name() + msvc14x_toolset_ver + '-' + cairomm_api_version
 
 # Create cairommconfig.h.
 mm_conf_data = configuration_data()
