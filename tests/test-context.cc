@@ -88,6 +88,7 @@ BOOST_AUTO_TEST_CASE(test_source)
     Cairo::SolidPattern::create_rgb (1.0, 0.5, 0.25);
   auto gradient_pattern =
     Cairo::LinearGradient::create (0.0, 0.0, 1.0, 1.0);
+  auto surface = Cairo::ImageSurface::create(Cairo::Surface::Format::ARGB32, 1, 1);
 
   cr->set_source (solid_pattern);
   {
@@ -105,6 +106,13 @@ BOOST_AUTO_TEST_CASE(test_source)
     auto retrieved_solid2 =
       std::dynamic_pointer_cast<const Cairo::SolidPattern>(cr2->get_source ());
     BOOST_REQUIRE (retrieved_solid2);
+
+    // Check that get_source_for_surface() returns an empty RefPtr,
+    // when the source is not a surface.
+    auto surface_pattern = cr->get_source_for_surface();
+    BOOST_CHECK(!surface_pattern);
+    auto surface_pattern2 = cr2->get_source_for_surface();
+    BOOST_CHECK(!surface_pattern2);
   }
 
   cr->set_source (gradient_pattern);
@@ -131,6 +139,7 @@ BOOST_AUTO_TEST_CASE(test_source)
     BOOST_CHECK_EQUAL (0.5, gx);
     BOOST_CHECK_EQUAL (0.25, bx);
   }
+
   cr->set_source_rgba (0.1, 0.3, 0.5, 0.7);
   {
     auto solid =
@@ -142,6 +151,14 @@ BOOST_AUTO_TEST_CASE(test_source)
     BOOST_CHECK_EQUAL (0.3, gx);
     BOOST_CHECK_EQUAL (0.5, bx);
     BOOST_CHECK_EQUAL (0.7, ax);
+  }
+
+  cr->set_source (surface, 0.0, 0.0);
+  {
+    auto surface_pattern = cr->get_source_for_surface();
+    BOOST_REQUIRE (surface_pattern);
+    surface_pattern->set_filter(Cairo::SurfacePattern::Filter::NEAREST);
+    BOOST_CHECK_EQUAL (to_int(Cairo::SurfacePattern::Filter::NEAREST), to_int(surface_pattern->get_filter()));
   }
 }
 
