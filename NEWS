@@ -1,3 +1,44 @@
+1.16.0 (stable):
+
+This is the first stable release in the cairomm-1.16 ABI series.
+It is parallel-installable with the cairomm-1.0 ABI.
+
+The tarball for 1.16.0 has been created with 'meson dist'.
+If you build with Autotools from the tarball, please read the relevant
+part of the README file.
+
+Cairo:
+* Add Context::get_source_for_surface()
+  (Kjell Ahlstedt) Issue #5 (Ian Britten)
+* Fix a memory leak in RefPtr
+  (Kjell Ahlstedt) Issue #23
+
+Build:
+* Require C++17
+  (Ting-Wei Lan) Bug #106172
+* Add NMake Makefiles
+  Remove the Visual Studio projects
+  (Chun-wei Fan) Issue #7, #22 merge request !7, !8, !10, !13
+* Add support for building with Meson
+  (Kjell Ahlstedt, Chun-wei Fan) Issue #20, merge request !8
+* Use __declspec(dllexport) when building cairomm on Visual Studio
+  Stop using gendef.exe
+  (Chun-wei Fan) Merge request !5
+* docs/reference/: Update for Doxygen >= 1.8.16
+  (Kjell Ahlstedt)
+
+Tests:
+* Update the source code
+  (Kjell Ahlstedt, Chun-wei Fan) Merge request !1
+* Don't include deprecated Boost header files
+  Fix tests in Autotools builds
+  (Kjell Ahlstedt)
+
+Documentation:
+* README: Update with instructions for building cairomm
+  (Kjell Ahlstedt)
+
+
 1.15.5 (unstable)
 (Distros should probably not package this yet.)
 
