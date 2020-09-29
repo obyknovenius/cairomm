@@ -93,7 +93,7 @@ install_pkgconfigdir = install_libdir / 'pkgconfig'
 # cairomm_dep (created in cairomm/meson.build):
 #   Dependencies when using the cairomm library.
 sigcxx_req = '>= 3.0.0'
-cairo_req = '>= 1.10.0'
+cairo_req = '>= 1.12.0'
 
 # There are pkg-config files for sigc++ on MSVC, so just use that.
 sigcxx_dep = dependency('sigc++-3.0', version: sigcxx_req)
