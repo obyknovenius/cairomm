@@ -1,7 +1,7 @@
 # This file is part of cairomm.
 
 project('cairomm', 'cpp',
-  version: '1.16.0',
+  version: '1.16.1',
   license: 'LGPLv2+',
   default_options: [
     'cpp_std=c++17',
@@ -270,12 +270,18 @@ if not meson.is_subproject()
     python3.path(), dist_changelog_py,
     project_source_root,
   )
+  # Don't distribute these files and directories.
+  dont_distribute = [
+    'tools',
+  ]
+
   # Add build scripts to the distribution directory, and delete .gitignore
   # files and an empty $MESON_DIST_ROOT/build/ directory.
   meson.add_dist_script(
     python3.path(), dist_build_scripts_py,
     project_source_root,
     'untracked' / 'build_scripts',
+    dont_distribute,
   )
 endif
 
