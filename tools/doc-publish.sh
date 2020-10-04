@@ -1,6 +1,7 @@
-#!/bin/bash
+#!/bin/bash -e
 
 # Upload cairomm documentation to cairographics.org/documentation/cairomm/reference
+# Run this script from the root of the build tree, typically cairomm/.
 
 if [ $# -ne 2 ]
 then

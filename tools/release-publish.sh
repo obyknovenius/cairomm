@@ -1,10 +1,11 @@
-#!/bin/bash
+#!/bin/bash -e
 
 # Upload a cairomm tarball to cairographics.org/releases
 
 # Before you call this script, make a tarball with 'meson dist' or 'make distcheck'
 # as described at https://wiki.gnome.org/MaintainersCorner/Releasing
 # but DO NOT upload it to master.gnome.org.
+# Run this script from the build tree directory where the tarball is.
 
 if [ $# -ne 2 ]
 then
