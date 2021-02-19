@@ -36,6 +36,14 @@ scp $tar_file $sha1_file $gpg_file $USERNAME@$RELEASE_UPLOAD_HOST:$RELEASE_UPLOA
 # Update the LATEST-$PACKAGE link.
 ssh $USERNAME@$RELEASE_UPLOAD_HOST "rm -f $RELEASE_UPLOAD_DIR/LATEST-$PACKAGE-[0-9]* && ln -s $tar_file $RELEASE_UPLOAD_DIR/LATEST-$PACKAGE-$VERSION"
 
+# Sign the tarball, and upload the detached signature file.
+# This is a preliminary fix. If cairo releases will be signed differently
+# in the future, cairomm should be changed accordingly.
+# https://gitlab.freedesktop.org/cairo/cairomm/-/issues/25
+# https://gitlab.freedesktop.org/cairo/cairo/-/issues/458
+#gpg --armor --detach-sign $tar_file
+#scp $tar_file.asc $USERNAME@$RELEASE_UPLOAD_HOST:$RELEASE_UPLOAD_DIR
+
 # Move the files to a subdir.
 #mkdir -p releases
 #mv $tar_file $sha1_file $gpg_file releases
