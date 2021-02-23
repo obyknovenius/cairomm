@@ -69,7 +69,7 @@ class CAIROMM_API Surface
 {
 public:
   /**
-   * Type is used to describe the type of a given surface. The
+   * %Cairo::Surface::Type is used to describe the type of a given surface. The
    * surface types are also known as "backends" or "surface backends" within
    * cairo.
    *
@@ -121,10 +121,20 @@ public:
        */
       QUARTZ = CAIRO_SURFACE_TYPE_QUARTZ,
 
+      //TODO: In cairomm 1.18.0: Really deprecate, with ifndef CAIROMM_DISABLE_DEPRECATED
+#ifndef WIN32
       /**
        * The surface is of type win32
+       *
+       * @deprecated Use WIN32_SURFACE instead.
        */
       WIN32 = CAIRO_SURFACE_TYPE_WIN32,
+#endif // WIN32
+      /**
+       * The surface is of type win32
+       * @since 1.16.1
+       */
+      WIN32_SURFACE = CAIRO_SURFACE_TYPE_WIN32,
 
       /**
        * The surface is of type beos
@@ -216,7 +226,6 @@ public:
        * @since 1.10
        */
       SUBSURFACE = CAIRO_SURFACE_TYPE_SUBSURFACE
-
   };
 
   /**
