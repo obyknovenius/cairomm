@@ -27,7 +27,6 @@ CAIROMM_BASE_CFLAGS =			\
 	/I.. /I.\cairomm		\
 	/D_USE_MATH_DEFINES		\
 	/EHsc /utf-8	\
-	/wd4251 /wd4275 /wd4530	\
 	/std:c++17
 
 CAIROMM_EXTRA_INCLUDES =	\
