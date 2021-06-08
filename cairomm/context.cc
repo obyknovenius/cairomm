@@ -886,6 +886,16 @@ RefPtr<const Surface> Context::get_group_target() const
   return get_surface_wrapper(surface);
 }
 
+SaveGuard::SaveGuard(RefPtr<Context> context) : ctx_{context}
+{
+  ctx_->save();
+}
+
+SaveGuard::~SaveGuard()
+{
+  ctx_->restore();
+}
+
 } //namespace Cairo
 
 // vim: ts=2 sw=2 et

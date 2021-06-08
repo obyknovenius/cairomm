@@ -1703,6 +1703,31 @@ protected:
   cobject* m_cobject;
 };
 
+
+/** RAII-style context save/restore class.  context->save() is called
+ * automatically when the object is created, and context->restore() is called
+ * when the object is destroyed.  This allows you to write code such as:
+ *
+ *     // context initial state
+ *     {
+ *         Cairo::SaveGuard saver(context);
+ *         ... // manipulate context
+ *     }
+ *     // context is restored to initial state
+ */
+class SaveGuard final {
+  public:
+    /// Constructor: the context is saved
+    explicit SaveGuard(RefPtr<Context> context);
+    /// Copy constructor deleted
+    SaveGuard(const SaveGuard &) = delete;
+    /// Destructor; the context is restored
+    ~SaveGuard();
+  private:
+    RefPtr<Context> ctx_;
+};
+
+
 } // namespace Cairo
 
 #endif //__CAIROMM_CONTEXT_H
