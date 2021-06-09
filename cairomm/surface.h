@@ -121,15 +121,14 @@ public:
        */
       QUARTZ = CAIRO_SURFACE_TYPE_QUARTZ,
 
-      //TODO: In cairomm 1.18.0: Really deprecate, with ifndef CAIROMM_DISABLE_DEPRECATED
-#ifndef WIN32
+#if !defined(WIN32) && !defined(CAIROMM_DISABLE_DEPRECATED)
       /**
        * The surface is of type win32
        *
        * @deprecated Use WIN32_SURFACE instead.
        */
       WIN32 = CAIRO_SURFACE_TYPE_WIN32,
-#endif // WIN32
+#endif // !WIN32 && !CAIROMM_DISABLE_DEPRECATED
       /**
        * The surface is of type win32
        * @since 1.16.1
