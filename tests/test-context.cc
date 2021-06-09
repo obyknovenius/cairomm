@@ -70,6 +70,12 @@ BOOST_AUTO_TEST_CASE(test_save_restore)
   BOOST_CHECK_EQUAL (4.0, cr->get_line_width ());
   cr->restore ();
   BOOST_CHECK_EQUAL (2.3, cr->get_line_width ());
+  {
+    Cairo::SaveGuard guard(cr);
+    cr->set_line_width(3.0);
+    BOOST_CHECK_EQUAL(3.0, cr->get_line_width());
+  }
+  BOOST_CHECK_EQUAL(2.3, cr->get_line_width());
 }
 
 BOOST_AUTO_TEST_CASE(test_operator)
