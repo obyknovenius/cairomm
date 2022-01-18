@@ -173,6 +173,13 @@ void Surface::get_device_scale(double& x_scale, double& y_scale) const
   cairo_surface_get_device_scale(const_cast<cobject*>(cobj()), &x_scale, &y_scale);
 }
 
+double Surface::get_device_scale() const
+{
+  double x_scale = 1, y_scale = 1;
+  get_device_scale(x_scale, y_scale);
+  return (x_scale + y_scale) / 2;
+}
+
 void Surface::set_fallback_resolution(double x_pixels_per_inch, double y_pixels_per_inch)
 {
   cairo_surface_set_fallback_resolution(cobj(), x_pixels_per_inch, y_pixels_per_inch);

@@ -446,9 +446,21 @@ public:
    */
   void set_device_scale(double x_scale, double y_scale);
 
+  /** Sets x and y scale to the same value.
+   * See set_device_scale(double, double) for details.
+   *
+   * @param scale 	a scale factor in the X and Y direction
+   */
+  inline void set_device_scale(double scale) { set_device_scale(scale, scale); }
+
   /** Returns a previous device scale set by set_device_scale().
    */
   void get_device_scale(double& x_scale, double& y_scale) const;
+
+  /** Returns the x and y average of a previous device scale set by
+   * set_device_scale().
+   */
+  double get_device_scale() const;
 
   /**
    * Set the horizontal and vertical resolution for image fallbacks.
