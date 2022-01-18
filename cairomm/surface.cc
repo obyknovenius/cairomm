@@ -162,6 +162,17 @@ void Surface::get_device_offset(double& x_offset, double& y_offset) const
   cairo_surface_get_device_offset(const_cast<cobject*>(cobj()), &x_offset, &y_offset);
 }
 
+void Surface::set_device_scale(double x_scale, double y_scale)
+{
+  cairo_surface_set_device_scale(cobj(), x_scale, y_scale);
+  check_object_status_and_throw_exception(*this);
+}
+
+void Surface::get_device_scale(double& x_scale, double& y_scale) const
+{
+  cairo_surface_get_device_scale(const_cast<cobject*>(cobj()), &x_scale, &y_scale);
+}
+
 void Surface::set_fallback_resolution(double x_pixels_per_inch, double y_pixels_per_inch)
 {
   cairo_surface_set_fallback_resolution(cobj(), x_pixels_per_inch, y_pixels_per_inch);
