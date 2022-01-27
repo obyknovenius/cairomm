@@ -431,6 +431,37 @@ public:
    */
   void get_device_offset(double& x_offset, double& y_offset) const;
 
+  /** Sets a scale that is multiplied to the device coordinates determined by
+   * the CTM when drawing to surface. One common use for this is to render to
+   * very high resolution display devices at a scale factor, so that code that
+   * assumes 1 pixel will be a certain size will still work. Setting a
+   * transformation via cairo_translate() isn't sufficient to do this, since
+   * functions like Cairo::Context::device_to_user() will expose the hidden scale.
+   *
+   * Note that the scale affects drawing to the surface as well as using the
+   * surface in a source pattern.
+   *
+   * @param x_scale 	a scale factor in the X direction
+   * @param y_scale 	a scale factor in the Y direction
+   */
+  void set_device_scale(double x_scale, double y_scale);
+
+  /** Sets x and y scale to the same value.
+   * See set_device_scale(double, double) for details.
+   *
+   * @param scale 	a scale factor in the X and Y direction
+   */
+  inline void set_device_scale(double scale) { set_device_scale(scale, scale); }
+
+  /** Returns a previous device scale set by set_device_scale().
+   */
+  void get_device_scale(double& x_scale, double& y_scale) const;
+
+  /** Returns the x and y average of a previous device scale set by
+   * set_device_scale().
+   */
+  double get_device_scale() const;
+
   /**
    * Set the horizontal and vertical resolution for image fallbacks.
    *

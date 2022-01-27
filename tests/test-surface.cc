@@ -89,6 +89,22 @@ BOOST_AUTO_TEST_CASE(test_content)
   BOOST_CHECK_EQUAL(similar->get_content(), CONTENT_ALPHA);
 }
 
+BOOST_AUTO_TEST_CASE(test_device_scale)
+{
+  auto surface = ImageSurface::create(Surface::Format::ARGB32, 1, 1);
+  const double new_x = 3, new_y = 5;
+  double x, y;
+  surface->set_device_scale(new_x, new_y);
+  surface->get_device_scale(x, y);
+  BOOST_CHECK_EQUAL(x, new_x);
+  BOOST_CHECK_EQUAL(y, new_y);
+  // average x/y scaling
+  BOOST_CHECK_EQUAL(4.0, surface->get_device_scale());
+  // uniform scaling
+  surface->set_device_scale(2);
+  BOOST_CHECK_EQUAL(2.0, surface->get_device_scale());
+}
+
 BOOST_AUTO_TEST_CASE(test_fallback_resolution)
 {
   auto surface = ImageSurface::create(Surface::Format::ARGB32, 1, 1);
