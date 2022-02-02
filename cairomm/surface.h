@@ -435,7 +435,7 @@ public:
    * the CTM when drawing to surface. One common use for this is to render to
    * very high resolution display devices at a scale factor, so that code that
    * assumes 1 pixel will be a certain size will still work. Setting a
-   * transformation via cairo_translate() isn't sufficient to do this, since
+   * transformation via Cairo::Context::scale() isn't sufficient to do this, since
    * functions like Cairo::Context::device_to_user() will expose the hidden scale.
    *
    * Note that the scale affects drawing to the surface as well as using the
@@ -443,6 +443,8 @@ public:
    *
    * @param x_scale 	a scale factor in the X direction
    * @param y_scale 	a scale factor in the Y direction
+   *
+   * @newin{1,18}
    */
   void set_device_scale(double x_scale, double y_scale);
 
@@ -450,15 +452,21 @@ public:
    * See set_device_scale(double, double) for details.
    *
    * @param scale 	a scale factor in the X and Y direction
+   *
+   * @newin{1,18}
    */
   inline void set_device_scale(double scale) { set_device_scale(scale, scale); }
 
   /** Returns a previous device scale set by set_device_scale().
+   *
+   * @newin{1,18}
    */
   void get_device_scale(double& x_scale, double& y_scale) const;
 
   /** Returns the x and y average of a previous device scale set by
    * set_device_scale().
+   *
+   * @newin{1,18}
    */
   double get_device_scale() const;
 
