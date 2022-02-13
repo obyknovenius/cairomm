@@ -36,7 +36,6 @@ if can_test
       cpp_args: ex[3] + boost_test_modname_flag + cairomm_tests_extra_cppargs,
       dependencies: [cairomm_own_dep, test_dep],
       implicit_include_directories: false,
-      gui_app: false,
       build_by_default: build_tests,
     )
 

@@ -6,8 +6,8 @@ project('cairomm', 'cpp',
   default_options: [
     'cpp_std=c++17',
   ],
-  meson_version: '>= 0.54.0', # required for meson.override_dependency()
-                              # and dep.get_variable(internal:)
+  meson_version: '>= 0.55.0', # required for meson.add_dist_script(python3, ...)
+                              # and meson.add_install_script(python3, ...)
 )
 
 cairomm_api_version = '1.16'
@@ -59,7 +59,7 @@ import os
 import sys
 sys.exit(os.path.isdir("@0@") or os.path.isfile("@0@"))
 '''.format(project_source_root / '.git')
-is_git_build = run_command(python3, '-c', cmd_py).returncode() != 0
+is_git_build = run_command(python3, '-c', cmd_py, check: false).returncode() != 0
 
 # Are we testing a dist tarball while it's being built?
 # There ought to be a better way. https://github.com/mesonbuild/meson/issues/6866
@@ -176,14 +176,16 @@ dist_build_scripts_py = script_dir / 'dist-build-scripts.py'
 if maintainer_mode
   # Copy files to untracked/build_scripts and untracked/docs.
   run_command(mm_common_get, '--force', script_dir,
-    project_source_root / 'untracked' / 'docs')
+    project_source_root / 'untracked' / 'docs',
+    check: true,
+  )
 else
   cmd_py = '''
 import os
 import sys
 sys.exit(os.path.isfile("@0@"))
 '''.format(doc_reference_py)
-  file_exists = run_command(python3, '-c', cmd_py).returncode() != 0
+  file_exists = run_command(python3, '-c', cmd_py, check: false).returncode() != 0
   if not file_exists
     warning('Missing files in untracked/. ' + \
     'Enable maintainer-mode if you want to build documentation or create a dist tarball.')
@@ -194,7 +196,9 @@ endif
 doc_perl_prop = run_command(
   python3, doc_reference_py, 'get_script_property',
   '', # MMDOCTOOLDIR is not used
-  'requires_perl')
+  'requires_perl',
+  check: false,
+)
 if not (doc_perl_prop.returncode() == 0 and doc_perl_prop.stdout() == 'false')
   # Perl is required, if documentation shall be built.
   perl = find_program('perl', required: build_documentation)
@@ -284,18 +288,19 @@ subdir('docs/reference')
 if can_add_dist_script
   # Add a ChangeLog file to the distribution directory.
   meson.add_dist_script(
-    python3.path(), dist_changelog_py,
+    python3, dist_changelog_py,
     project_source_root,
   )
   # Don't distribute these files and directories.
   dont_distribute = [
     'tools',
+    '.gitlab-ci.yml',
   ]
 
   # Add build scripts to the distribution directory, and delete .gitignore
   # files and an empty $MESON_PROJECT_DIST_ROOT/build/ directory.
   meson.add_dist_script(
-    python3.path(), dist_build_scripts_py,
+    python3, dist_build_scripts_py,
     project_source_root,
     'untracked' / 'build_scripts',
     dont_distribute,

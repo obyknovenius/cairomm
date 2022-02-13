@@ -34,7 +34,6 @@ foreach ex : examples
     cpp_args: [ '-DCAIROMM_DISABLE_DEPRECATED' ] + ex_disabled_warnings,
     dependencies: cairomm_own_dep,
     implicit_include_directories: false,
-    gui_app: false,
     build_by_default: build_examples
   )
 endforeach
