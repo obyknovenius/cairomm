@@ -1,6 +1,9 @@
+# 2022-03-18: ubuntu:latest = 20.04, ubuntu:rolling = 21.10, ubuntu:devel = 22.04
+# See https://hub.docker.com/_/ubuntu
 image: ubuntu:devel
 
 stages:
+  - deps
   - build
   - deploy
 
@@ -17,8 +20,8 @@ variables:
                   ninja-build
   GIT_SUBMODULE_STRATEGY: normal
 
-# In glibmm a cache is used for copying libsigc/ from a build_sigc job to
-# jobs that build glibmm. That's not possible in cairomm.
+# In glibmm a cache is used for saving libsigc/ from the build_deps job.
+# That's not possible in cairomm.
 # It looks like a cache can be used only locally within a job.
 # Result in the build_sigc job:
 #   No URL provided, cache will be not uploaded to shared cache server.
@@ -30,13 +33,31 @@ variables:
   before_script:
     - export DEBIAN_FRONTEND=noninteractive
     - apt update && apt -y upgrade && apt -y install $DEPENDENCIES
-    - git clone --branch 3.0.7 --depth 1 https://github.com/libsigcplusplus/libsigcplusplus libsigc
+
+build_deps:
+  extends: .build_default
+  stage: deps
+  variables:
+    DEPENDENCIES: $MESON_GCC_DEPS docbook5-xml docbook-xsl
+
+  script:
+    # Build dependencies that can't be installed with apt.
+    # Install to ./installdir, with the contents of the installed files
+    # (notably .pc files) suited for installation to /usr.
+    - export DESTDIR=`pwd`/installdir
+    # Build libsigc++3
+    - git clone --branch 3.2.0 --depth 1 https://github.com/libsigcplusplus/libsigcplusplus.git libsigc
     - cd libsigc
     - mkdir _build && cd _build
-    - meson --prefix=/usr --libdir=lib -Dwarnings=fatal -Dbuild-examples=false -Dbuildtype=release
+    - meson --prefix=/usr --libdir=lib -Dvalidation=false -Dbuild-examples=false -Dbuildtype=release
     - meson compile
     - meson install
-    - cd ../..
+  # Transfer the installed part of the built dependencies to later stages
+  # as artifacts.
+  artifacts:
+    paths:
+      - installdir/
+    expire_in: 1 day
 
 release_gcc_build:
   extends: .build_default
@@ -44,6 +65,7 @@ release_gcc_build:
   variables:
     DEPENDENCIES: $MESON_GCC_DEPS
   script:
+    - cp -r installdir/usr /
     - mkdir _build && cd _build
     # -Ddebug=false + -Doptimization=3 correspond to -Dbuildtype=release
     - meson --prefix=/usr --libdir=lib -Ddebug=false -Doptimization=3 -Dwarnings=fatal
@@ -61,6 +83,7 @@ release_clang_build:
   variables:
     DEPENDENCIES: $MESON_GCC_DEPS clang
   script:
+    - cp -r installdir/usr /
     - mkdir _build && cd _build
     # -Ddebug=false + -Doptimization=3 correspond to -Dbuildtype=release
     - CC=clang CXX=clang++ meson --prefix=/usr --libdir=lib -Ddebug=false -Doptimization=3 -Dwarnings=fatal
