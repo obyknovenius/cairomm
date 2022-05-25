@@ -241,10 +241,33 @@ msvc14x_toolset_ver = ''
 # MSVC: Ignore warnings that aren't really harmful, but make those
 #       that should not be overlooked stand out.
 if is_msvc
-  foreach wd : ['/FImsvc_recommended_pragmas.h', '/wd4267', '/wd4800', '/utf-8']
-    disabled_warning = cpp_compiler.get_supported_arguments(wd)
-    add_project_arguments(disabled_warning, language: 'cpp')
-  endforeach
+  disable_warnings_list = [
+    '/EHsc',  # avoid warnings caused by exception handling model used
+    '/utf-8', # Avoid C4819 unicode conversion warnings when building on CJK locales
+    '/wd4800', # Implicit conversion from 'type' to bool. Possible information loss
+  ]
+
+  # Turn off harmless warnings but make potentially dangerous ones glaring,
+  # distributed with GLib, if available
+  use_recommended_pragmas =  cpp_compiler.get_supported_arguments('/FImsvc_recommended_pragmas.h')
+  if use_recommended_pragmas.length() > 0
+    add_project_arguments(use_recommended_pragmas, language: 'cpp')
+  else
+    disable_warnings_list += [
+      '/wd4244', # 'conversion' conversion from 'type1' to 'type2', possible loss of data
+      '/wd4101', # unreferenced local variable
+    ]
+  endif
+
+  if host_machine.cpu_family() == 'x86_64' or host_machine.cpu_family() == 'aarch64'
+    # 'var' : conversion from 'size_t' to 'type', possible loss of data (applies on 64-bit builds)
+    disable_warnings_list += '/wd4267'
+  endif
+
+  add_project_arguments(
+    cpp_compiler.get_supported_arguments(disable_warnings_list),
+    language: 'cpp'
+  )
   if use_msvc14x_toolset_ver
     if cpp_compiler.version().version_compare('>=19.30')
       msvc14x_toolset_ver = '-vc143'
