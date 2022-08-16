@@ -1,5 +1,8 @@
 /* This file is part of cairomm. */
 
+/* Define to omit deprecated API from the library. */
+#undef CAIROMM_DISABLE_DEPRECATED
+
 /* Defined when the --enable-api-exceptions configure argument was given */
 #undef CAIROMM_EXCEPTIONS_ENABLED
 

@@ -73,6 +73,7 @@ MM_ARG_ENABLE_WARNINGS([CAIROMM_WXXFLAGS],
                        [-Wall],
                        [-pedantic -Wall -Wextra -Wformat-security -Wsuggest-override],
                        [SIGCXX])
+MM_ARG_DISABLE_DEPRECATED_API
 
 AC_ARG_ENABLE([tests],
               [AS_HELP_STRING([--enable-tests], [enable automated tests [default=no]])],
