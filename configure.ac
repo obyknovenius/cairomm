@@ -15,7 +15,7 @@
 ## You should have received a copy of the GNU Lesser General Public License
 ## along with this library.  If not, see <http://www.gnu.org/licenses/>.
 
-AC_INIT([cairomm], [1.16.1],
+AC_INIT([cairomm], [1.16.2],
         [https://gitlab.freedesktop.org/cairo/cairomm/-/issues],
         [cairomm], [http://www.cairographics.org/cairomm/])
 AC_PREREQ([2.62])
@@ -48,7 +48,7 @@ AC_PROG_LIBTOOL
 PKG_PROG_PKG_CONFIG
 
 AC_SUBST([CAIROMM_EXTRA_LIBS], [''])
-AC_SUBST([CAIROMM_MODULES], ['cairo >= 1.12.0 sigc++-3.0 >= 3.0.0'])
+AC_SUBST([CAIROMM_MODULES], ['cairo >= 1.14.0 sigc++-3.0 >= 3.0.0'])
 AC_SUBST([MSVC_TOOLSET_VER], [''])
 cairomm_allmodules=$CAIROMM_MODULES
 CAIROMM_INSTALL_PC='data/cairomm-1.16.pc'

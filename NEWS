@@ -1,3 +1,36 @@
+1.17.0 (unstable) or 1.18.0 (stable): <<<Not released yet>>>
+
+* Add SaveGuard save/restore object
+  (Jason Rhinelander, Kjell Ahlstedt) Issue #9
+* Add Surface::set/get_device_scale()
+  (Thomas Holder) Merge request !22
+
+Documentation:
+* Surface: Use cairomm names where possible
+  (Kjell Ahlstedt)
+
+Build:
+* Meson build: Re-organize warnings-related compiler flags for MSVC
+  (Chun-wei Fan) Merge request !24
+* Autotools build: Add --disable-deprecated-api
+  (Kjell Ahlstedt) Issue #29 (bbhtt)
+* Require cairo >= 1.14.0
+  (Kjell Ahlstedt)
+
+
+1.16.2 (stable):
+
+Build:
+* MSVC build: Support VS2022 builds
+  (Chun-wei Fan) Merge request !20, !21
+* Meson build: When mm-common >= 1.0.4 is used, Perl is not required
+* Meson build: Specify 'check' option in run_command()
+  Will be necessary with future versions of Meson.
+  Require Meson >= 0.55.0
+* Meson build: Avoid unnecessary configuration warnings
+  (Kjell Ahlstedt)
+
+
 1.16.1 (stable):
 
 Cairo:

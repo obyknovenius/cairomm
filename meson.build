@@ -1,7 +1,7 @@
 # This file is part of cairomm.
 
 project('cairomm', 'cpp',
-  version: '1.16.1',
+  version: '1.16.2',
   license: 'LGPLv2+',
   default_options: [
     'cpp_std=c++17',
@@ -102,7 +102,7 @@ install_pkgconfigdir = install_libdir / 'pkgconfig'
 # cairomm_dep (created in cairomm/meson.build):
 #   Dependencies when using the cairomm library.
 sigcxx_req = '>= 3.0.0'
-cairo_req = '>= 1.12.0'
+cairo_req = '>= 1.14.0'
 
 # There are pkg-config files for sigc++ on MSVC, so just use that.
 sigcxx_dep = dependency('sigc++-3.0', version: sigcxx_req)
